@@ -1,0 +1,21 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# --- Dependencies ---
+__pycache__/
+.venv/
+.env
+api/
+
+# --- Build Outputs ---
+dist/
+build/
+*.log
+
+# --- Editor Specific ---
+.vscode/
+.idea/
+
+# --- Project Specific ---
+uploads/
+backend/data/*.json
+*.pt

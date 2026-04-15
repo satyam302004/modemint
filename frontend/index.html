@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModeMint</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <div class="topbar">
+        <div class="brand-mark">
+          <span class="brand-dot"></span>
+          <div class="brand-copy">
+            <strong>ModeMint</strong>
+            <span>Outfits, wardrobe logic, and stylist chat in one place.</span>
+          </div>
+        </div>
+        <div class="glass-pill">Fashion AI Platform</div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">Personal Styling, Simplified</span>
+          <h1>Dress like the plan was obvious.</h1>
+          <p>ModeMint helps you generate polished looks, mix pieces from your own wardrobe, browse small-designer finds, and ask for styling help without fighting a messy interface.</p>
+          <div class="hero-actions">
+            <button class="primary" onclick="document.querySelector('[data-tab=generate]').click()">Start Styling</button>
+            <button class="secondary" onclick="document.querySelector('[data-tab=chat]').click()">Talk to AI</button>
+          </div>
+          <div class="hero-pills">
+            <span class="pill">Occasion-aware outfits</span>
+            <span class="pill">Wardrobe image upload</span>
+            <span class="pill">Local designer store</span>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="feature-band">
+            <h2>Three clear spaces</h2>
+            <p>Generate looks, browse the store, and use the chatbot from a calmer, premium layout inspired by modern Apple product pages.</p>
+            <div class="collection-strip">
+              <div class="stat"><strong id="resultCount">0</strong><span class="muted">outfits found</span></div>
+              <div class="stat"><strong id="favoriteCount">0</strong><span class="muted">favorites</span></div>
+              <div class="stat"><strong id="topTrendScore">0.0</strong><span class="muted">top trend</span></div>
+            </div>
+          </div>
+
+          <div class="feature-band">
+            <div class="meta-row"><strong>Current status</strong><span id="resultsSummary">Pick your filters and generate looks.</span></div>
+            <p style="margin-top:12px;">The layout is visual-first now, but all of your existing endpoints, saving, uploads, wardrobe generation, and chatbot logic still run under the same IDs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-nav">
+        <button class="nav-card active" data-tab="generate">
+          <strong>Generate Outfit</strong>
+          <span>Build looks from your style preferences.</span>
+        </button>
+        <button class="nav-card" data-tab="wardrobe">
+          <strong>My Wardrobe</strong>
+          <span>Manage your closet and build looks you own.</span>
+        </button>
+        <button class="nav-card" data-tab="favorites">
+          <strong>Favorites</strong>
+          <span>Looks you've saved for later.</span>
+        </button>
+        <button class="nav-card" data-tab="store">
+          <strong>Store For Artism</strong>
+          <span>Browse local and small-designer pieces.</span>
+        </button>
+        <button class="nav-card" data-tab="chat">
+          <strong>AI Chat Bot</strong>
+          <span>Ask in natural language and get a styling answer.</span>
+        </button>
+      </div>
+
+      <div class="sections">
+        <section class="section active" data-section="generate">
+          <div class="section-head">
+            <div>
+              <h2>Generate Outfit</h2>
+              <p>Choose the occasion, set the budget, and let the app build an outfit that feels curated instead of random.</p>
+            </div>
+            <div class="section-summary">Use the left panel to define the look. Your best matches appear on the right with item-by-item shopping links and styling reasons.</div>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-subhead">
+                <div>
+                  <h3>Build My Outfit</h3>
+                  <p class="panel-intro">A cleaner control stack for occasion, budget, and personal taste.</p>
+                </div>
+                <span class="glass-pill">Recommendation Engine</span>
+              </div>
+
+              <label>Occasion
+                <select id="occasion">
+                  <option value="wedding">Wedding</option>
+                  <option value="casual">Casual</option>
+                  <option value="party">Party</option>
+                  <option value="college">College</option>
+                  <option value="formal">Formal</option>
+                </select>
+              </label>
+              <label>Budget in Rs.
+                <input id="budget" type="number" min="500" step="100" value="5000">
+              </label>
+              <label>Style preference
+                <select id="style">
+                  <option value="minimal">Minimal</option>
+                  <option value="streetwear">Streetwear</option>
+                  <option value="ethnic">Ethnic</option>
+                  <option value="classic">Classic</option>
+                  <option value="chic">Chic</option>
+                  <option value="smart-casual">Smart Casual</option>
+                </select>
+              </label>
+              <div class="button-row">
+                <button class="primary" id="recommendButton">Generate outfits</button>
+                <button class="secondary" id="presetCollege">College under 3000</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="result-hero">
+                <div>
+                  <h3>Recommended Looks</h3>
+                  <p class="panel-intro">Your best outfit combinations appear here.</p>
+                </div>
+                <span class="glass-pill">Live Results</span>
+              </div>
+              <div id="outfits" class="card-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="wardrobe">
+          <div class="section-head">
+            <div>
+              <h2>My Wardrobe</h2>
+              <p>Manage your closet and build outfits entirely from pieces you own.</p>
+            </div>
+            <div class="section-summary">Upload items, categorize them, and instantly get personalized wardrobe suggestions.</div>
+          </div>
+          <div class="wardrobe-grid" style="margin-top:18px;">
+            <div class="panel">
+              <div class="panel-subhead">
+                <div>
+                  <h3>My Wardrobe</h3>
+                  <p class="panel-intro">Upload a clothing image, let the app guess the details, then generate looks from your own closet.</p>
+                </div>
+                <span class="glass-pill">Wardrobe Builder</span>
+              </div>
+
+              <label>Clothing name
+                <input id="wardrobeName" type="text" placeholder="White shirt">
+              </label>
+              <label>Category
+                <select id="wardrobeCategory">
+                  <option value="top">Top</option>
+                  <option value="bottom">Bottom</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="accessory">Accessory</option>
+                </select>
+              </label>
+              <label>Color
+                <input id="wardrobeColor" type="text" placeholder="white">
+              </label>
+              <label>Style
+                <select id="wardrobeStyle">
+                  <option value="casual">Casual</option>
+                  <option value="streetwear">Streetwear</option>
+                  <option value="classic">Classic</option>
+                  <option value="formal">Formal</option>
+                </select>
+              </label>
+              <label>Best occasion
+                <select id="wardrobeOccasion">
+                  <option value="college">College</option>
+                  <option value="casual">Casual</option>
+                  <option value="party">Party</option>
+                  <option value="formal">Formal</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="versatile">Versatile</option>
+                </select>
+              </label>
+              <label>Photo
+                <div style="display: flex; gap: 12px; align-items: center; margin-top: 8px;">
+                  <input id="wardrobeImage" type="file" accept="image/*" style="flex: 1;">
+                  <button id="openCameraButton" class="secondary" style="flex-shrink: 0;" type="button">Use Camera</button>
+                </div>
+              </label>
+              <div id="cameraContainer" style="display:none; position:relative; overflow:hidden; border-radius:var(--radius-lg); margin-bottom:12px; background:#000;">
+                <video id="cameraStream" autoplay playsinline style="width:100%; max-height:240px; display:block; object-fit:cover;"></video>
+                <div style="position:absolute; bottom:12px; left:0; width:100%; display:flex; justify-content:center; gap:8px; z-index:10;">
+                  <button id="snapPhotoButton" class="primary" type="button">Snap</button>
+                  <button id="closeCameraButton" class="ghost" style="background:rgba(255,255,255,0.8);" type="button">Cancel</button>
+                </div>
+              </div>
+              <canvas id="cameraCanvas" style="display:none;"></canvas>
+              <img id="wardrobePreview" class="preview-image" alt="Wardrobe preview" style="display:none;">
+              <p id="wardrobeAnalysis" class="muted">Upload or snap a clothing image and the app will try to guess the details.</p>
+              <div class="button-row">
+                <button class="primary" id="addWardrobeButton">Add to wardrobe</button>
+                <button class="secondary" id="generateWardrobeButton">Generate from wardrobe</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-subhead">
+                <div>
+                  <h3>Wardrobe Library</h3>
+                  <p class="panel-intro">Saved pieces and instantly generated combinations.</p>
+                </div>
+                <span class="glass-pill">Closet View</span>
+              </div>
+              <div id="wardrobeList" class="card-grid"></div>
+              <div style="height:18px"></div>
+              <div class="panel-subhead">
+                <div>
+                  <h3>Wardrobe Outfits</h3>
+                  <p class="panel-intro">Looks built only from what you already own.</p>
+                </div>
+              </div>
+              <div id="wardrobeOutfits" class="card-grid"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" data-section="favorites">
+          <div class="section-head">
+            <div>
+              <h2>Favorites</h2>
+              <p>Your curated collection of top outfit choices, saved for later review.</p>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:18px;">
+            <div class="panel-subhead">
+              <div>
+                <h3>Favorites</h3>
+                <p class="panel-intro">Saved looks stay here for quick review.</p>
+              </div>
+              <span class="glass-pill">Saved Board</span>
+            </div>
+            <div id="favorites" class="card-grid"></div>
+          </div>
+        </section>
+
+        <section class="section" data-section="store">
+          <div class="section-head">
+            <div>
+              <h2>Store For Artism</h2>
+              <p>Small-designer products in a calmer storefront layout that feels more premium and easier to browse.</p>
+            </div>
+            <div class="section-summary"><strong id="catalogCount">0</strong> products are currently loaded into the catalog.</div>
+          </div>
+          <div class="panel" style="margin-bottom:18px;">
+            <div class="panel-subhead">
+              <div>
+                <h3>Trend Signals</h3>
+                <p class="panel-intro">Curated Pinterest-style trend keywords that influence ranking.</p>
+              </div>
+              <span class="glass-pill">Trend Layer</span>
+            </div>
+            <div id="trendSignals" class="card-grid"></div>
+          </div>
+          <div id="catalog" class="card-grid"></div>
+        </section>
+
+        <section class="section" data-section="chat">
+          <div class="section-head">
+            <div>
+              <h2>AI Chat Bot</h2>
+              <p>Ask what to wear in plain language. If the external model is unavailable, the app can still answer with its built-in styling fallback.</p>
+            </div>
+            <div class="section-summary">Try a direct prompt like a college fest under Rs. 3000 in streetwear, then compare the answer with the outfit generator.</div>
+          </div>
+
+          <div class="chat-layout">
+            <div class="panel">
+              <div class="panel-subhead">
+                <div>
+                  <h3>Prompt Stylist</h3>
+                  <p class="panel-intro">Natural-language input with the same catalog and wardrobe context behind it.</p>
+                </div>
+                <span class="glass-pill">Conversational Styling</span>
+              </div>
+              <label>Ask your question
+                <textarea id="chatInput" placeholder="What should I wear to a college fest under 3000 in streetwear style?"></textarea>
+              </label>
+              <div class="button-row">
+                <button class="primary" id="chatButton">Ask stylist</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-subhead">
+                <div>
+                  <h3>Response</h3>
+                  <p class="panel-intro">The answer appears here with model or fallback details.</p>
+                </div>
+                <span class="glass-pill">Live Output</span>
+              </div>
+              <div id="chatResponse" class="chat-response">The chatbot will convert your request into outfit filters.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
+
+
+
