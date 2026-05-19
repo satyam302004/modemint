@@ -1,6 +1,14 @@
 # ModeMint - AI Fashion Outfit Recommender
 
+<p align="center">
+  <a href="https://modemint.onrender.com/">
+    <img src="https://img.shields.io/badge/Live-Demo-0071e3?style=for-the-badge" alt="Live Demo">
+  </a>
+</p>
+
 A Flask-based web application that provides AI-powered outfit recommendations using fashion trends, wardrobe items, and product catalogs.
+
+**🌐 Live Demo:** [https://modemint.onrender.com/](https://modemint.onrender.com/)
 
 ## Features
 
