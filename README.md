@@ -17,7 +17,7 @@ A Flask-based web application that provides AI-powered outfit recommendations us
 3. Activate: `.venv\Scripts\activate` (Windows)
 4. Install dependencies: `pip install -r requirements.txt`
 5. Set up environment variables in `.env`
-6. Run the app: `python backend/app.py`
+6. Run the app: `python -m backend.app`
 
 ## API Endpoints
 

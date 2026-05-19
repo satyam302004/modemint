@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from typing import Any
 
-from backend.config import DEFAULT_BUDGET
+from flask import Blueprint, jsonify
 
 meta_bp = Blueprint("meta", __name__)
 

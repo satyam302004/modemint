@@ -1,9 +1,4 @@
-const BASE_URL = (() => {
-  if (window.location.protocol.startsWith("http")) {
-    return `${window.location.protocol}//${window.location.hostname}:5000`;
-  }
-  return "http://127.0.0.1:5000";
-})();
+const BASE_URL = window.location.origin;
 
 const state = { catalog: [], favorites: [], lastOutfits: [] };
 
@@ -505,14 +500,15 @@ async function processWardrobeMedia(file) {
     });
     const data = await parseResponse(response);
     const analysis = data.analysis || {};
+    const inferredItem = (analysis.items && analysis.items[0]) || {};
 
-    document.getElementById("wardrobeName").value = analysis.name || document.getElementById("wardrobeName").value;
-    document.getElementById("wardrobeCategory").value = analysis.category || document.getElementById("wardrobeCategory").value;
-    document.getElementById("wardrobeColor").value = analysis.color || document.getElementById("wardrobeColor").value;
-    document.getElementById("wardrobeStyle").value = analysis.style || document.getElementById("wardrobeStyle").value;
-    document.getElementById("wardrobeOccasion").value = analysis.occasion || document.getElementById("wardrobeOccasion").value;
+    document.getElementById("wardrobeName").value = inferredItem.name || document.getElementById("wardrobeName").value;
+    document.getElementById("wardrobeCategory").value = inferredItem.category || document.getElementById("wardrobeCategory").value;
+    document.getElementById("wardrobeColor").value = inferredItem.color || document.getElementById("wardrobeColor").value;
+    document.getElementById("wardrobeStyle").value = inferredItem.style || document.getElementById("wardrobeStyle").value;
+    document.getElementById("wardrobeOccasion").value = inferredItem.occasion || document.getElementById("wardrobeOccasion").value;
     wardrobeImageInput.dataset.uploadedImage = data.image || "";
-    wardrobeAnalysis.textContent = `AI guessed ${analysis.name || "item"} - ${analysis.category || "top"} - ${analysis.color || "unknown"} (${analysis.source || "fallback"})`;
+    wardrobeAnalysis.textContent = `AI guessed ${inferredItem.name || "item"} - ${inferredItem.category || "top"} - ${inferredItem.color || "unknown"} (${analysis.source || "fallback"})`;
   } catch (error) {
     wardrobeAnalysis.textContent = error.message;
   }

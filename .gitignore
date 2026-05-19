@@ -1,5 +1,3 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-
 # --- Dependencies ---
 __pycache__/
 .venv/
@@ -17,5 +15,6 @@ build/
 
 # --- Project Specific ---
 uploads/
-backend/data/*.json
+backend/data/favorites.json
+backend/data/wardrobe.json
 *.pt

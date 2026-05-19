@@ -1,3 +1,5 @@
+from typing import Any
+
 from backend.config import DEFAULT_BUDGET
 
 def parse_budget(value: Any, default: int = DEFAULT_BUDGET) -> int:

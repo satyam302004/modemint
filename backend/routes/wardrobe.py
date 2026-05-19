@@ -1,13 +1,13 @@
 import os
 import uuid
+from typing import Any
+
 from flask import Blueprint, jsonify, request
-from werkzeug.utils import secure_filename
 
 from ..config import ALLOWED_IMAGE_EXTENSIONS, UPLOADS_DIR
 from ..services.detection import detect_clothing
 from ..services.recommendations import load_wardrobe, generate_wardrobe_outfits
 from ..utils.data_loader import save_json
-from ..utils.validators import parse_budget
 
 wardrobe_bp = Blueprint("wardrobe", __name__)
 

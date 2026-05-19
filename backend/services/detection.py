@@ -48,11 +48,14 @@ def _get_model():
     if _MODEL is not None:
         return _MODEL
 
-    # Import lazily so the rest of the backend can run even if
-    # ultralytics isn't installed yet.
+    from ..config import STATIC_DIR
+    model_path = os.path.join(STATIC_DIR, "yolov8n.pt")
+    if not os.path.exists(model_path):
+        return None
+
     from ultralytics import YOLO  # type: ignore
 
-    _MODEL = YOLO("static/yolov8n.pt")
+    _MODEL = YOLO(model_path)
     _MODEL_NAMES = getattr(_MODEL, "names", None)
     return _MODEL
 

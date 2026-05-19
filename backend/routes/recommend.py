@@ -1,3 +1,5 @@
+from typing import Any
+
 from flask import Blueprint, jsonify, request
 
 from ..config import DEFAULT_BUDGET, DEFAULT_OCCASION, DEFAULT_STYLE, FAVORITES_FILE

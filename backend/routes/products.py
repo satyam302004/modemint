@@ -1,3 +1,5 @@
+from typing import Any
+
 from flask import Blueprint, jsonify
 
 from ..services.recommendations import load_products, load_trends

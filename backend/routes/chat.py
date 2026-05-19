@@ -1,8 +1,8 @@
+from typing import Any
+
 from flask import Blueprint, jsonify, request
 
 from ..services.openai_service import ask_openai_chatbot, build_local_chat_response
-
-from ..config import DEFAULT_OPENAI_MODEL
 
 chat_bp = Blueprint("chat", __name__)
 

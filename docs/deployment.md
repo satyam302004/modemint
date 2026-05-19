@@ -7,7 +7,7 @@
 3. Activate: `.venv\Scripts\activate` (Windows)
 4. Install dependencies: `pip install -r requirements.txt`
 5. Set environment variables in `.env`
-6. Run: `python backend/app.py`
+6. Run: `python -m backend.app`
 
 ## Production Deployment
 

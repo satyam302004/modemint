@@ -1,4 +1,8 @@
-flask
-flask-cors
-openai
-python-dotenv
+flask>=3.0
+flask-cors>=4.0
+openai>=1.0
+python-dotenv>=1.0
+ultralytics>=8.0
+opencv-python>=4.8
+numpy>=1.24
+gunicorn>=21.2
