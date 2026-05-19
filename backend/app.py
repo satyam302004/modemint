@@ -36,9 +36,22 @@ def ensure_data_files() -> None:
         with open(WARDROBE_FILE, "w", encoding="utf-8") as file:
             json.dump([], file, indent=2)
 
+# Register blueprints FIRST so API routes take priority over the catch-all
+app.register_blueprint(products_bp)
+app.register_blueprint(wardrobe_bp)
+app.register_blueprint(chat_bp)
+app.register_blueprint(recommend_bp)
+app.register_blueprint(meta_bp)
+
+ensure_data_files()
+
 @app.route("/")
 def index() -> Any:
     return send_from_directory(FRONTEND_DIR, "index.html")
+
+@app.route("/uploads/<filename>")
+def uploads(filename: str) -> Any:
+    return send_from_directory(UPLOADS_DIR, filename)
 
 @app.route("/css/<path:path>")
 def serve_css(path: str) -> Any:
@@ -54,19 +67,6 @@ def serve_frontend_static(path: str) -> Any:
     if os.path.isfile(file_path):
         return send_from_directory(FRONTEND_DIR, path)
     return send_from_directory(FRONTEND_DIR, "index.html")
-
-@app.route("/uploads/<filename>")
-def uploads(filename: str) -> Any:
-    return send_from_directory(UPLOADS_DIR, filename)
-
-# Register blueprints (must be before the catch-all frontend route)
-app.register_blueprint(products_bp)
-app.register_blueprint(wardrobe_bp)
-app.register_blueprint(chat_bp)
-app.register_blueprint(recommend_bp)
-app.register_blueprint(meta_bp)
-
-ensure_data_files()
 
 if __name__ == "__main__":
     app.run(debug=True)
