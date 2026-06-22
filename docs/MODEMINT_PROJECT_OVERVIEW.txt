@@ -1,0 +1,525 @@
+ModeMint - Project Overview
+Project root: D:\Project\
+
+1. Project Summary
+ModeMint is an AI fashion outfit recommender built as a Flask web application.
+It helps users:
+- generate outfit recommendations from a product catalog
+- manage a personal wardrobe
+- upload wardrobe images for clothing detection
+- save favorite outfits
+- chat with an AI stylist
+
+The app is a monolithic web application:
+- Flask serves the API
+- Flask also serves the frontend HTML, CSS, and JS
+- data is stored in JSON files, not in a database
+
+2. Core Architecture
+High-level architecture:
+
+User Browser
+  -> Flask app
+     -> static frontend pages
+     -> API routes
+        -> recommendation engine
+        -> wardrobe storage
+        -> clothing detection
+        -> AI chat service
+        -> JSON data files
+
+Main runtime components:
+- Frontend: static HTML/CSS/JS served by Flask
+- Backend: Flask application
+- AI chat provider: Groq via OpenAI SDK compatibility
+- Local fallback chat logic if external AI fails
+- Wardrobe detection: YOLO via ultralytics with filename fallback
+- Persistence: JSON files and uploaded images
+
+3. Tech Stack
+Backend:
+- Python 3.11+ recommended
+- Flask
+- flask-cors
+- gunicorn
+- python-dotenv
+
+AI / Detection:
+- OpenAI Python SDK used against Groq API
+- ultralytics YOLO
+- opencv-python
+- numpy
+
+Frontend:
+- HTML
+- CSS
+- Vanilla JavaScript
+
+Deployment:
+- Docker
+- Docker Compose
+- Render
+
+4. Repository Structure
+Top-level structure:
+- api\
+- backend\
+- frontend\
+- docs\
+- scripts\
+- Dockerfile
+- docker-compose.yml
+- render.yaml
+- requirements.txt
+- README.md
+- .env.example
+
+Important backend files:
+- backend\app.py
+- backend\config.py
+- backend\routes\recommend.py
+- backend\routes\wardrobe.py
+- backend\routes\chat.py
+- backend\routes\products.py
+- backend\routes\meta.py
+- backend\services\recommendations.py
+- backend\services\openai_service.py
+- backend\services\detection.py
+- backend\utils\data_loader.py
+
+Important frontend files:
+- frontend\index.html
+- frontend\studio.html
+- frontend\js\app.js
+- frontend\css\style.css
+
+Important data and storage directories:
+- backend\data\
+- backend\uploads\
+- backend\static\
+
+5. Application Entry Points
+Backend entrypoint:
+- backend\app.py
+
+Frontend entrypoints:
+- / -> frontend\index.html
+- /studio.html -> main application workspace
+
+Production start command:
+- gunicorn -w 4 -b 0.0.0.0:5000 backend.app:app
+
+Development start command:
+- python -m backend.app
+
+6. Backend Responsibilities
+The Flask backend is responsible for:
+- serving the frontend files
+- exposing JSON API endpoints
+- loading and saving favorites and wardrobe data
+- loading products and trends data
+- scoring and ranking outfit combinations
+- handling image uploads
+- running clothing detection
+- serving uploaded images
+- providing AI stylist responses
+
+7. Frontend Responsibilities
+The frontend is responsible for:
+- rendering the homepage and studio interface
+- collecting user filters like occasion, style, and budget
+- displaying generated outfits
+- displaying catalog products and trends
+- managing favorites UI
+- managing wardrobe UI
+- uploading wardrobe images
+- showing AI chat responses
+
+Frontend behavior comes mainly from:
+- frontend\studio.html
+- frontend\js\app.js
+
+8. Detailed User Flow
+8.1 Homepage
+1. User opens `/`
+2. Flask serves `frontend/index.html`
+3. User clicks Enter Studio
+
+8.2 Studio Page
+1. User opens `studio.html`
+2. Frontend JS initializes
+3. Frontend loads products, favorites, wardrobe, and trends from API endpoints
+4. User can switch between Generate, Wardrobe, Store, and Chat sections
+
+9. Recommendation Engine Flow
+Route:
+- POST /recommend
+
+Implementation:
+- backend\routes\recommend.py
+- backend\services\recommendations.py
+
+Flow:
+1. Frontend sends occasion, style, and budget
+2. Backend normalizes inputs
+3. Backend loads products from `backend/data/products.json`
+4. Backend filters products by:
+   - budget
+   - occasion
+   - style
+5. Products are grouped into required categories:
+   - top
+   - bottom
+   - shoes
+   - accessory
+6. All valid category combinations are generated
+7. Each outfit is scored using:
+   - occasion match
+   - style match
+   - trend score
+   - trend boost from trend data
+   - local designer bonus
+   - budget bonus
+8. Outfits are sorted and top results are returned
+
+Returned response includes:
+- query info
+- outfits list
+- summary metadata
+
+10. Wardrobe Flow
+Route group:
+- GET /wardrobe
+- POST /wardrobe
+- POST /wardrobe/upload
+- DELETE /wardrobe/<id>
+- POST /wardrobe/generate
+
+Implementation:
+- backend\routes\wardrobe.py
+- backend\services\detection.py
+- backend\services\recommendations.py
+
+Wardrobe storage:
+- backend/data/wardrobe.json
+
+10.1 Manual wardrobe item creation
+1. Frontend sends item fields to POST /wardrobe
+2. Backend validates required fields
+3. Backend appends item to wardrobe JSON
+4. Saved item is returned
+
+10.2 Image upload and analysis
+1. Frontend uploads image to POST /wardrobe/upload
+2. Backend saves image to `backend/uploads/`
+3. Backend runs clothing detection
+4. Detection returns inferred wardrobe items and labels
+5. Frontend can use detected values to help create wardrobe entries
+
+10.3 Generate outfits from wardrobe
+1. Frontend sends occasion and style to POST /wardrobe/generate
+2. Backend loads wardrobe items
+3. Backend groups items by required categories:
+   - top
+   - bottom
+   - shoes
+4. Optional accessories are added to combinations
+5. Outfits are scored and returned
+
+11. Clothing Detection Flow
+Implementation:
+- backend\services\detection.py
+
+How it works:
+1. Determine dominant color using a lightweight OpenCV heuristic
+2. Try to load YOLO model from:
+   - backend/static/yolov8n.pt
+3. If model is available, run detection on uploaded image
+4. Keep only conservative fashion-related labels
+5. Map detected labels to wardrobe item categories and metadata
+6. If model is unavailable or detection fails, guess item from filename
+7. If filename also gives no good clue, return a generic fallback item
+
+Important limitation:
+- The YOLO model is general-purpose, not fashion-specialized
+- Detection quality is best-effort only
+
+12. AI Chat Flow
+Route:
+- POST /chat
+
+Implementation:
+- backend\routes\chat.py
+- backend\services\openai_service.py
+
+Primary behavior:
+1. Frontend sends a free-text styling prompt
+2. Backend tries to create a Groq-compatible OpenAI client
+3. Backend builds app context from:
+   - catalog products
+   - wardrobe items
+   - favorites
+   - trends
+4. Backend sends the request to the configured Groq model
+5. Backend returns the generated styling response
+
+Fallback behavior:
+If Groq API fails or `GROQ_API_KEY` is missing:
+1. Backend uses `build_local_chat_response()`
+2. Local logic infers:
+   - occasion
+   - style
+   - budget
+   - whether wardrobe/favorites/local/trends should be prioritized
+3. Backend builds a rule-based recommendation response
+
+Important note:
+- Chat is not purely local by default
+- It prefers Groq when credentials are configured
+
+13. Data and Persistence
+This project does not use a relational or document database.
+It uses JSON files for persistence.
+
+Configured files in `backend/config.py`:
+- backend/data/products.json
+- backend/data/favorites.json
+- backend/data/wardrobe.json
+- backend/data/trends.json
+
+Uploads:
+- backend/uploads/
+
+Behavior:
+- Favorites and wardrobe files are created automatically if missing
+- Data is persisted by writing JSON directly to disk
+
+14. API Endpoints
+14.1 Frontend and health
+- GET / -> homepage
+- GET /meta -> available occasions, styles, budgets
+
+14.2 Catalog and trends
+- GET /products
+- GET /trends
+
+14.3 Recommendations
+- POST /recommend
+
+Request JSON:
+{
+  "occasion": "casual",
+  "style": "minimal",
+  "budget": 5000
+}
+
+14.4 Favorites
+- GET /favorites
+- POST /favorites
+- DELETE /favorites/<id>
+
+Save favorite request JSON:
+{
+  "name": "Saved casual look",
+  "outfit": { ... }
+}
+
+14.5 Wardrobe
+- GET /wardrobe
+- POST /wardrobe
+- POST /wardrobe/upload
+- DELETE /wardrobe/<id>
+- POST /wardrobe/generate
+
+Wardrobe item request JSON:
+{
+  "name": "White Shirt",
+  "category": "top",
+  "color": "white",
+  "style": "classic",
+  "occasion": "formal",
+  "image": "/uploads/example.jpg"
+}
+
+14.6 Chat
+- POST /chat
+
+Request JSON:
+{
+  "message": "Suggest a casual outfit under 5000"
+}
+
+15. Environment Variables
+From `.env.example`:
+- GROQ_API_KEY=your-groq-api-key-here
+- GROQ_MODEL=openai/gpt-oss-20b
+- FLASK_ENV=production
+
+What they do:
+- GROQ_API_KEY: enables external AI chat through Groq
+- GROQ_MODEL: selects the model used by the Groq/OpenAI-compatible client
+- FLASK_ENV: runtime environment mode
+
+16. Local Development Setup
+Recommended setup:
+
+1. Open terminal in `D:\Project`
+2. Create virtual environment:
+   - python -m venv .venv
+3. Activate it on Windows:
+   - .venv\Scripts\activate
+4. Install dependencies:
+   - pip install -r requirements.txt
+5. Create `.env` based on `.env.example`
+6. Start app:
+   - python -m backend.app
+
+App URL:
+- http://localhost:5000/
+
+17. Production and Docker Execution
+17.1 Docker
+File:
+- docker-compose.yml
+
+Start with:
+- docker compose build
+- docker compose up
+
+Current compose behavior:
+- single `web` service
+- maps port 5000:5000
+- mounts:
+  - uploads_data -> /app/backend/uploads
+  - data_data -> /app/backend/data
+
+17.2 Dockerfile
+File:
+- Dockerfile
+
+Current behavior:
+- uses python:3.11-slim
+- installs requirements
+- copies repository
+- ensures backend data directories exist
+- exposes port 5000
+- starts Gunicorn
+
+17.3 Render deployment
+File:
+- render.yaml
+
+Current configuration:
+- service name: modemint
+- runtime: python
+- build command: pip install -r requirements.txt
+- start command: gunicorn -w 4 -b 0.0.0.0:$PORT backend.app:app
+
+18. Execution Process End-to-End
+Typical execution sequence:
+1. Start Flask backend
+2. Open browser at http://localhost:5000/
+3. Enter the studio page
+4. Frontend loads products, trends, favorites, and wardrobe data
+5. User generates outfits or uploads wardrobe images
+6. Backend computes recommendations or wardrobe combinations
+7. User can save favorites
+8. User can ask the AI stylist
+9. Responses are shown directly in the frontend UI
+
+19. Testing Process
+Manual testing checklist:
+1. Open `/` and confirm homepage loads
+2. Open `studio.html`
+3. Generate outfits using different filters
+4. Save a favorite outfit
+5. Add a wardrobe item manually
+6. Upload a wardrobe image
+7. Generate wardrobe outfits
+8. Open Store section and verify products and trends load
+9. Test chat with and without GROQ_API_KEY
+
+Suggested checks:
+- budget filtering works
+- style filtering works
+- favorites persist after restart
+- wardrobe persists after restart
+- uploaded images are accessible from `/uploads/...`
+- chat fallback works without Groq key
+
+20. Troubleshooting
+Problem: app does not start
+Check:
+- dependencies installed
+- virtual environment activated
+- correct Python version
+
+Problem: chat returns fallback instead of AI model
+Check:
+- GROQ_API_KEY is present in `.env`
+- outbound network access is available
+- Groq model name is valid
+
+Problem: wardrobe upload fails
+Check:
+- image extension is jpg, jpeg, png, or webp
+- uploads directory exists and is writable
+
+Problem: clothing detection is weak or generic
+Check:
+- whether `backend/static/yolov8n.pt` exists
+- remember detection is best-effort and not fashion-specialized
+
+Problem: recommendations are empty
+Check:
+- `products.json` contains enough items in all required categories
+- category coverage exists for selected style and occasion
+- budget is high enough
+
+Problem: favorites or wardrobe are not saved
+Check:
+- backend/data is writable
+- JSON files are not corrupted
+
+21. Known Constraints
+- No database; persistence is file-based
+- Chat quality depends on Groq API availability or local fallback quality
+- YOLO detection is approximate and not fashion-specific
+- Frontend is static/vanilla JS, not component-based React/Vue
+- Recommendation quality depends on product and trend JSON quality
+
+22. Important Files to Know First
+Start reading these first if you need fast project understanding:
+- backend/app.py
+- backend/config.py
+- backend/routes/recommend.py
+- backend/routes/wardrobe.py
+- backend/routes/chat.py
+- backend/services/recommendations.py
+- backend/services/openai_service.py
+- backend/services/detection.py
+- frontend/studio.html
+- frontend/js/app.js
+- docker-compose.yml
+- Dockerfile
+- render.yaml
+
+23. Short Quick Start
+Run locally:
+- cd D:\Project
+- python -m venv .venv
+- .venv\Scripts\activate
+- pip install -r requirements.txt
+- python -m backend.app
+
+Then open:
+- http://localhost:5000/
+
+24. Final Operational Rule
+If you change:
+- frontend JS or HTML -> refresh browser
+- backend logic -> restart Flask app
+- environment variables -> restart Flask app
+- JSON data files -> reload UI or restart app if needed
+
+End of file

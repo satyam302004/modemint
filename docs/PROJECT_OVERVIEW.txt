@@ -1,0 +1,535 @@
+Chatbot for AILernova - Project Overview
+Primary project location: D:\ailernova-chatbot\
+Overview file location: D:\Project\docs\PROJECT_OVERVIEW.txt
+
+1. Project Summary
+This project is a self-hosted AI educational tutor chatbot for AILernova.
+It uses a Retrieval-Augmented Generation (RAG) architecture to answer questions only from lesson PDF content.
+The system is designed to avoid external AI APIs and runs fully on local or self-hosted components.
+
+Main purpose:
+- ingest lesson PDFs
+- convert them into searchable vector embeddings
+- retrieve relevant lesson text for a user question
+- generate an answer grounded in those lesson chunks
+- expose the chatbot through a React floating widget
+
+2. Core Architecture
+High-level architecture:
+
+User -> React Widget -> FastAPI Backend -> Retriever -> ChromaDB
+                                         -> Ollama LLM
+                                         -> Lessons PDF Content
+
+Detailed flow:
+1. User asks a question in the widget.
+2. Widget sends the question and conversation history to the backend.
+3. Backend embeds the question.
+4. Backend searches ChromaDB for the most relevant lesson chunks.
+5. Backend builds a strict prompt using only those retrieved chunks.
+6. The backend prefers an extractive lesson-grounded answer path and can fall back to LLM generation.
+7. Ollama generates an answer when needed.
+8. Backend filters the answer so unsupported statements are removed.
+9. Backend returns the final validated text to the widget.
+10. Widget renders the reply.
+
+3. Tech Stack
+Backend:
+- Python 3.14
+- FastAPI
+- Uvicorn
+- httpx
+- Pydantic
+- PyMuPDF (fitz) for PDF extraction
+- LangChain text splitter
+- SentenceTransformers for embeddings
+- ChromaDB for vector storage
+
+LLM / AI:
+- Ollama
+- llama3.2 model
+
+Frontend Widget:
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- react-markdown
+
+Deployment / Runtime:
+- Docker
+- Docker Compose
+
+4. Main Components
+4.1 Backend
+Path:
+- D:\ailernova-chatbot\backend\
+
+Responsibilities:
+- expose API endpoints
+- ingest PDFs
+- chunk and embed text
+- retrieve lesson chunks
+- generate strict lesson-grounded answers
+- run health checks
+
+4.2 Widget
+Path:
+- D:\ailernova-chatbot\widget\
+
+Responsibilities:
+- floating chat button and panel
+- send user question to backend
+- keep conversation history
+- render assistant answers, including markdown lists
+- provide demo page and embeddable script
+
+4.3 Data Storage
+- Lessons PDFs: D:\ailernova-chatbot\lessons\
+- Backend Chroma data: D:\ailernova-chatbot\backend\chroma_db\
+- Docker Chroma data: D:\ailernova-chatbot\chroma_data\
+- Ollama data: D:\ailernova-chatbot\ollama_data\
+
+5. Folder Structure
+D:\ailernova-chatbot\
+- backend\
+- widget\
+- lessons\
+- scripts\
+- docs\
+- chroma_data\
+- ollama_data\
+- docker-compose.yml
+- CONTINUE.md
+
+Important backend files:
+- backend\app\main.py
+- backend\app\api\routes.py
+- backend\app\rag\generator.py
+- backend\app\rag\retriever.py
+- backend\app\rag\embedder.py
+- backend\app\ingest\processor.py
+- backend\seed.py
+
+Important widget files:
+- widget\package.json
+- widget\src\main.tsx
+- widget\src\ChatWidget.tsx
+- widget\src\components\MessageList.tsx
+- widget\src\hooks\useChat.ts
+- widget\public\embed.js
+- widget\public\demo.html
+
+6. Backend Execution Flow
+6.1 App Startup
+File:
+- backend\app\main.py
+
+What it does:
+- creates FastAPI app
+- enables CORS
+- registers API router
+
+6.2 API Endpoints
+File:
+- backend\app\api\routes.py
+
+Endpoints:
+- GET / -> basic API running message
+- GET /api/v1/health -> checks backend, Ollama, ChromaDB
+- POST /api/v1/ask -> answer user question from lessons
+- POST /api/v1/ingest -> upload and ingest PDF
+
+6.3 Ask Flow
+POST /api/v1/ask
+Request format:
+{
+  "question": "What are loops?",
+  "messages": [
+    {"role": "user", "content": "previous question"},
+    {"role": "assistant", "content": "previous answer"}
+  ]
+}
+
+Flow:
+1. validate question is not empty
+2. retrieve relevant chunks from ChromaDB
+3. if no chunks found, return lesson-content-not-available response
+4. generate strict answer from lesson chunks
+5. return plain text response
+
+7. RAG Pipeline
+7.1 Ingestion
+File:
+- backend\app\ingest\processor.py
+
+Steps:
+1. open PDF with PyMuPDF
+2. extract page text
+3. split text into chunks
+4. embed chunks using SentenceTransformers
+5. store embeddings and metadata in ChromaDB
+
+7.2 Retrieval
+File:
+- backend\app\rag\retriever.py
+
+Steps:
+1. embed user query
+2. query ChromaDB collection
+3. return top relevant chunks with metadata
+
+7.3 Generation and Strictness
+File:
+- backend\app\rag\generator.py
+
+Current behavior:
+- builds prompt from retrieved lesson chunks
+- respects formatting requests like point wise, bullet points, short
+- blocks unsupported generalizations
+- has strict filtering for claims not supported by lesson chunks
+- prefers an extractive answer path for strict lesson-grounded responses
+- falls back to the refusal text when lesson support is insufficient
+
+Strictness rules currently include:
+- no invented definitions
+- no invented benefits or importance claims
+- no broad generalization beyond lesson wording
+- unsupported points should be omitted
+
+8. Widget Flow
+8.1 Build Output
+The widget is built in library mode and outputs:
+- widget.js
+- widget.css
+- embed.js
+- index.html (demo page copied into dist)
+
+8.2 Demo Page
+URL:
+- http://localhost:8080/
+
+This page exists only to test the widget locally.
+
+8.3 Embedded Widget Flow
+1. host page loads embed.js
+2. embed.js sets window config
+3. embed.js loads widget.js
+4. widget mounts itself into the page
+5. user opens chat bubble and sends a question
+
+8.4 Message Rendering
+- user messages are shown as plain text
+- assistant messages are rendered as markdown
+- numbered and bulleted responses display as formatted lists
+
+9. Local Execution Process
+9.1 Start Backend
+Command:
+cd D:\ailernova-chatbot\backend
+python -W ignore -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+Notes:
+- startup may take around 8 seconds
+- Python 3.14 may need -W ignore because of pydantic v1 warning
+
+9.2 Start Widget
+Command:
+cd D:\ailernova-chatbot\widget
+npx serve dist -p 8080 --cors
+
+9.3 Health Check
+URL:
+http://localhost:8000/api/v1/health
+
+Expected:
+- backend ok
+- ollama ok
+- chromadb ok
+
+9.4 Demo Page
+URL:
+http://localhost:8080/
+
+10. Rebuild / Reingest Process
+10.1 Rebuild Widget
+cd D:\ailernova-chatbot\widget
+npm install
+npm run build
+
+10.2 Re-seed Lesson Data
+Use after PDF content changes:
+cd D:\ailernova-chatbot\backend
+python seed.py
+
+10.3 If backend is already running
+- restart backend after backend code changes
+- hard refresh browser after widget rebuild using Ctrl+Shift+R
+
+11. Docker Execution Process
+From project root:
+cd D:\ailernova-chatbot
+docker compose build
+docker compose up -d
+
+Pull model:
+docker compose exec ollama ollama pull llama3.2
+
+Seed data:
+docker compose run backend python seed.py
+
+Docker services:
+- ollama -> port 11434
+- chromadb -> host 8001 mapped to container 8000
+- backend -> port 8000
+- widget -> port 8080
+
+12. API Reference
+12.1 Health
+GET
+http://localhost:8000/api/v1/health
+
+12.2 Ask
+POST
+http://localhost:8000/api/v1/ask
+
+Body:
+{
+  "question": "What are loops?",
+  "messages": []
+}
+
+12.3 Ingest PDF
+POST
+http://localhost:8000/api/v1/ingest
+
+Form-data:
+- file = somefile.pdf
+
+13. Current Project Behavior
+Working:
+- PDF ingestion
+- chunking and embedding
+- vector retrieval
+- Ollama answer generation
+- conversation history
+- floating widget
+- markdown rendering in widget
+- demo page at localhost:8080
+- strict lesson-grounded answer behavior
+
+Important behavior:
+- answers should stay inside lesson context
+- point-wise responses should render as actual lists
+- widget can be embedded using embed.js
+
+14. Important Files and Their Purpose
+backend\app\main.py
+- FastAPI app entry point
+
+backend\app\api\routes.py
+- health, ask, ingest endpoints
+
+backend\app\rag\generator.py
+- prompt construction, extractive answer path, and strict answer filtering
+
+backend\app\rag\retriever.py
+- vector retrieval from ChromaDB
+
+backend\app\rag\embedder.py
+- embedding model loading and query/doc embeddings
+
+backend\app\ingest\processor.py
+- PDF extraction, chunking, storage
+
+backend\seed.py
+- seeds lesson data into vector DB
+
+widget\src\hooks\useChat.ts
+- frontend chat request and history logic
+
+widget\src\components\MessageList.tsx
+- assistant/user message rendering and markdown display
+
+widget\public\embed.js
+- embeddable loader script
+
+widget\public\demo.html
+- local demo/test page copied to dist\index.html
+
+widget\package.json
+- widget build commands
+
+docker-compose.yml
+- multi-service local deployment
+
+CONTINUE.md
+- current session/project state summary
+
+15. Troubleshooting
+Problem: localhost:8080 shows folder listing
+Cause:
+- dist\index.html missing
+Fix:
+- rebuild widget so demo page is copied into dist
+
+Problem: backend not responding
+Check:
+- backend process running
+- health URL
+- wait for model startup time
+
+Problem: health shows Ollama unreachable
+Check:
+- Ollama running on 11434
+- model pulled: llama3.2
+
+Problem: answers too generic
+Check:
+- retrieved lesson content exists
+- seed data is current
+- backend strict answer logic is active
+
+Problem: lesson changes not reflected
+Fix:
+- regenerate PDF if needed
+- run python seed.py again
+- restart backend
+
+Problem: formatting not updating in browser
+Fix:
+- rebuild widget
+- hard refresh browser
+
+16. Known Constraints
+- backend startup is not instant
+- local model generation may be slower than cloud APIs
+- strict context mode may make answers less natural, but more accurate to lessons
+- answer quality depends on lesson content coverage
+- if lesson text does not contain a fact, the system should not invent it
+- strict extractive mode may still need cleanup improvements for sentence selection and deduplication
+
+17. Recommended Workflow for Development
+1. Edit lesson or backend/widget code
+2. If widget changed:
+   - run npm run build
+3. If lesson PDFs changed:
+   - run python seed.py
+4. Restart backend if backend code changed
+5. Open demo page
+6. Test health endpoint
+7. Test normal question
+8. Test follow-up question
+9. Test point-wise formatting
+10. Verify answer stays inside lesson context
+
+18. Current Test URLs
+- Widget demo: http://localhost:8080/
+- API root: http://localhost:8000/
+- Health: http://localhost:8000/api/v1/health
+- API ask: POST http://localhost:8000/api/v1/ask
+- PDF ingest: POST http://localhost:8000/api/v1/ingest
+
+19. Quick Start Summary
+19.1 Start Backend
+cd D:\ailernova-chatbot\backend
+python -W ignore -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+19.2 Start Widget
+cd D:\ailernova-chatbot\widget
+npx serve dist -p 8080 --cors
+
+19.3 Open in Browser
+- Widget demo: http://localhost:8080/
+- Backend health: http://localhost:8000/api/v1/health
+
+19.4 Rebuild After Widget Changes
+cd D:\ailernova-chatbot\widget
+npm install
+npm run build
+
+Then hard refresh the browser with Ctrl+Shift+R.
+
+19.5 Re-seed After Lesson PDF Changes
+cd D:\ailernova-chatbot\backend
+python seed.py
+
+Then restart the backend.
+
+19.6 Quick Test Questions
+- What is Python?
+- What are the common data types in Python?
+- What are loops? give me point wise answer.
+- give short answer
+- give bullet points
+
+20. API Examples
+20.1 Health Check in Browser
+GET
+http://localhost:8000/api/v1/health
+
+20.2 Ask API Example
+POST
+http://localhost:8000/api/v1/ask
+
+JSON body:
+{
+  "question": "What are loops? give me point wise answer.",
+  "messages": []
+}
+
+20.3 Ask API Example With Conversation History
+POST
+http://localhost:8000/api/v1/ask
+
+JSON body:
+{
+  "question": "give short answer",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What are loops? give me point wise answer."
+    },
+    {
+      "role": "assistant",
+      "content": "1. Python has only two types of loops: 'for' and 'while'."
+    }
+  ]
+}
+
+20.4 PowerShell Example For Ask API
+$body = @{
+    question = 'What are the common data types in Python?'
+    messages = @()
+} | ConvertTo-Json
+
+Invoke-WebRequest -Uri 'http://localhost:8000/api/v1/ask' `
+    -Method Post `
+    -ContentType 'application/json' `
+    -Body $body `
+    -UseBasicParsing
+
+20.5 Ingest PDF Example
+POST
+http://localhost:8000/api/v1/ingest
+
+Form-data:
+- file = your_lesson.pdf
+
+20.6 PowerShell Example For PDF Ingest
+Invoke-WebRequest -Uri 'http://localhost:8000/api/v1/ingest' `
+    -Method Post `
+    -Form @{ file = Get-Item 'D:\path\to\your_lesson.pdf' }
+
+21. Future Improvements
+- better per-point citations
+- cleaner strict extractive formatting
+- stronger deduplication in strict answers
+- admin panel for PDF upload
+- teacher dashboard
+- analytics
+- quizzes
+- multi-language support
+- voice tutor
+
+End of file

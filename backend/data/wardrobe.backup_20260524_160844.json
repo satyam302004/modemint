@@ -1,0 +1,452 @@
+[
+  {
+    "id": "wardrobe-1",
+    "name": "White Campus Tee",
+    "category": "top",
+    "color": "white",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/cfedc4d49e2a4367aecc622c805d1aa9-white-campus-tee.jpg"
+  },
+  {
+    "id": "wardrobe-2",
+    "name": "White Minimal Tee",
+    "category": "top",
+    "color": "white",
+    "style": "minimal",
+    "occasion": "casual",
+    "image": "/uploads/9889591471ce4d59bcc2c566b227e08c-white-minimal-tee.jpg"
+  },
+  {
+    "id": "wardrobe-3",
+    "name": "White Weekend Tee",
+    "category": "top",
+    "color": "white",
+    "style": "casual",
+    "occasion": "casual",
+    "image": "/uploads/e86a1666a64c49efbd288f5ed2211013-white-weekend-tee.jpg"
+  },
+  {
+    "id": "wardrobe-4",
+    "name": "White Layering Tee",
+    "category": "top",
+    "color": "white",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/bbc1b6df598e494085f5c68583da85c9-white-layering-tee.jpg"
+  },
+  {
+    "id": "wardrobe-5",
+    "name": "White Basics Tee",
+    "category": "top",
+    "color": "white",
+    "style": "smart-casual",
+    "occasion": "casual",
+    "image": "/uploads/762658c263ad49b39580408d9dd5005c-white-basics-tee.jpg"
+  },
+  {
+    "id": "wardrobe-6",
+    "name": "Blue Street Jeans",
+    "category": "bottom",
+    "color": "blue",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/2d54ecdbe80a471981befc5708fd3056-blue-street-jeans.jpg"
+  },
+  {
+    "id": "wardrobe-7",
+    "name": "Blue Everyday Jeans",
+    "category": "bottom",
+    "color": "blue",
+    "style": "casual",
+    "occasion": "casual",
+    "image": "/uploads/736e8498b64d446bb1d38320a5cf8de3-blue-everyday-jeans.jpg"
+  },
+  {
+    "id": "wardrobe-8",
+    "name": "Blue Weekend Denim",
+    "category": "bottom",
+    "color": "blue",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/d6238c06fd974303a88affd710ab10ed-blue-weekend-denim.jpg"
+  },
+  {
+    "id": "wardrobe-9",
+    "name": "Blue Relaxed Jeans",
+    "category": "bottom",
+    "color": "blue",
+    "style": "streetwear",
+    "occasion": "casual",
+    "image": "/uploads/42fe3fc6d5b7490c9a78d3f7db6de560-blue-relaxed-jeans.jpg"
+  },
+  {
+    "id": "wardrobe-10",
+    "name": "Blue Classic Jeans",
+    "category": "bottom",
+    "color": "blue",
+    "style": "classic",
+    "occasion": "college",
+    "image": "/uploads/9502062f56e341c4bd2ad3ecf24ac3b3-blue-classic-jeans.jpg"
+  },
+  {
+    "id": "wardrobe-11",
+    "name": "Red Flex Sneaker",
+    "category": "shoes",
+    "color": "red",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/4458a3d10531407798b769b350b76d10-red-flex-sneaker.jpg"
+  },
+  {
+    "id": "wardrobe-12",
+    "name": "Red Training Sneaker",
+    "category": "shoes",
+    "color": "red",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/581baba65fc04a979bfaefe40b8dc770-red-training-sneaker.jpg"
+  },
+  {
+    "id": "wardrobe-13",
+    "name": "Red Sport Sneaker",
+    "category": "shoes",
+    "color": "red",
+    "style": "streetwear",
+    "occasion": "casual",
+    "image": "/uploads/d6e9766fc6cb42ddb919444948003138-red-sport-sneaker.jpg"
+  },
+  {
+    "id": "wardrobe-14",
+    "name": "Red Daily Sneaker",
+    "category": "shoes",
+    "color": "red",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/aa00f444bf6d4558b4e124025560914d-red-daily-sneaker.jpg"
+  },
+  {
+    "id": "wardrobe-15",
+    "name": "Red Statement Sneaker",
+    "category": "shoes",
+    "color": "red",
+    "style": "streetwear",
+    "occasion": "party",
+    "image": "/uploads/47189b2460da428492cac5a1a7ab0e3c-red-statement-sneaker.jpg"
+  },
+  {
+    "id": "wardrobe-16",
+    "name": "Black Oxford Shirt",
+    "category": "top",
+    "color": "black",
+    "style": "classic",
+    "occasion": "formal",
+    "image": "/uploads/fc58a402513248458c24be3bf19dcc28-black-oxford-shirt.jpg"
+  },
+  {
+    "id": "wardrobe-17",
+    "name": "Beige Linen Shirt",
+    "category": "top",
+    "color": "beige",
+    "style": "minimal",
+    "occasion": "casual",
+    "image": "/uploads/7dc46509aaeb40658d1d8526ae73211c-beige-linen-shirt.jpg"
+  },
+  {
+    "id": "wardrobe-18",
+    "name": "Blue Denim Jacket",
+    "category": "top",
+    "color": "blue",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/8aa23b07a58d484ca19d023128e95122-blue-denim-jacket.jpg"
+  },
+  {
+    "id": "wardrobe-19",
+    "name": "Olive Bomber Jacket",
+    "category": "top",
+    "color": "olive",
+    "style": "streetwear",
+    "occasion": "party",
+    "image": "/uploads/493c99400f9b41d092dc1d6b0ff3e597-olive-bomber-jacket.jpg"
+  },
+  {
+    "id": "wardrobe-20",
+    "name": "White Festive Kurta",
+    "category": "top",
+    "color": "white",
+    "style": "ethnic",
+    "occasion": "wedding",
+    "image": "/uploads/4ef1e3ddf2074e599f2859ce366b067f-white-festive-kurta.jpg"
+  },
+  {
+    "id": "wardrobe-21",
+    "name": "Grey City Hoodie",
+    "category": "top",
+    "color": "grey",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/9145b61dc90e4dd795348ee65783a269-grey-city-hoodie.jpg"
+  },
+  {
+    "id": "wardrobe-22",
+    "name": "Navy Sharp Blazer",
+    "category": "top",
+    "color": "navy",
+    "style": "smart-casual",
+    "occasion": "formal",
+    "image": "/uploads/75a7cf9dc5764993a90a3787797ba004-navy-sharp-blazer.jpg"
+  },
+  {
+    "id": "wardrobe-23",
+    "name": "Cream Cozy Sweater",
+    "category": "top",
+    "color": "cream",
+    "style": "chic",
+    "occasion": "casual",
+    "image": "/uploads/c4cf3d031ae8482ba92f5a1ee9cb784f-cream-cozy-sweater.jpg"
+  },
+  {
+    "id": "wardrobe-24",
+    "name": "Emerald Party Top",
+    "category": "top",
+    "color": "green",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/efcc76fb757a45b3a8f45d5a8cf32ea2-emerald-party-top.jpg"
+  },
+  {
+    "id": "wardrobe-25",
+    "name": "Black Winter Coat",
+    "category": "top",
+    "color": "black",
+    "style": "formal",
+    "occasion": "formal",
+    "image": "/uploads/e6c5947438d24056bcf386d8e257c7b9-black-winter-coat.jpg"
+  },
+  {
+    "id": "wardrobe-26",
+    "name": "Tailored Black Trousers",
+    "category": "bottom",
+    "color": "black",
+    "style": "formal",
+    "occasion": "formal",
+    "image": "/uploads/eed5cf30bad14bc1a2380d03c373e570-tailored-black-trousers.jpg"
+  },
+  {
+    "id": "wardrobe-27",
+    "name": "Beige Casual Chinos",
+    "category": "bottom",
+    "color": "beige",
+    "style": "smart-casual",
+    "occasion": "casual",
+    "image": "/uploads/6f0561f8cbfb4cb18bcf65856cfe2bb2-beige-casual-chinos.jpg"
+  },
+  {
+    "id": "wardrobe-28",
+    "name": "Olive Cargo Pants",
+    "category": "bottom",
+    "color": "olive",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/8e7f6c4bfd034287b8884713799629e1-olive-cargo-pants.jpg"
+  },
+  {
+    "id": "wardrobe-29",
+    "name": "Grey Office Pants",
+    "category": "bottom",
+    "color": "grey",
+    "style": "classic",
+    "occasion": "formal",
+    "image": "/uploads/2fb9100b7f9b402ab4ed0c955091c081-grey-office-pants.jpg"
+  },
+  {
+    "id": "wardrobe-30",
+    "name": "Wide Leg Denim",
+    "category": "bottom",
+    "color": "blue",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/ead3525766f341038499f1601bfdb838-wide-leg-denim.jpg"
+  },
+  {
+    "id": "wardrobe-31",
+    "name": "Pleated Chic Trousers",
+    "category": "bottom",
+    "color": "black",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/cfa7f46711d44b9aa7eece3e25110047-pleated-chic-trousers.jpg"
+  },
+  {
+    "id": "wardrobe-32",
+    "name": "Festive Palazzo",
+    "category": "bottom",
+    "color": "maroon",
+    "style": "ethnic",
+    "occasion": "wedding",
+    "image": "/uploads/6001df69acfa4109ba312c4c04bb0cfd-festive-palazzo.jpg"
+  },
+  {
+    "id": "wardrobe-33",
+    "name": "Black Summer Shorts",
+    "category": "bottom",
+    "color": "black",
+    "style": "casual",
+    "occasion": "casual",
+    "image": "/uploads/064d777a1638402fa53c21a9918dcaba-black-summer-shorts.jpg"
+  },
+  {
+    "id": "wardrobe-34",
+    "name": "White Flow Skirt",
+    "category": "bottom",
+    "color": "white",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/f3d6c9c9dead4381a4ea70aaaf473c2a-white-flow-skirt.jpg"
+  },
+  {
+    "id": "wardrobe-35",
+    "name": "Blue Classic Jeans Plus",
+    "category": "bottom",
+    "color": "blue",
+    "style": "classic",
+    "occasion": "casual",
+    "image": "/uploads/4ed5b00dbda54917a06e0cbdf0ed3169-blue-classic-jeans-plus.jpg"
+  },
+  {
+    "id": "wardrobe-36",
+    "name": "White Court Sneakers",
+    "category": "shoes",
+    "color": "white",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/31a590a85f3c41f6a78b5ef6f2d76b44-white-court-sneakers.jpg"
+  },
+  {
+    "id": "wardrobe-37",
+    "name": "Black Formal Loafers",
+    "category": "shoes",
+    "color": "black",
+    "style": "formal",
+    "occasion": "formal",
+    "image": "/uploads/ca1cea24f08440b69e45062cd444043d-black-formal-loafers.jpg"
+  },
+  {
+    "id": "wardrobe-38",
+    "name": "Tan Party Heels",
+    "category": "shoes",
+    "color": "tan",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/c2c379d8cdd04a40bba9a78053b9ffe0-tan-party-heels.jpg"
+  },
+  {
+    "id": "wardrobe-39",
+    "name": "Brown Leather Boots",
+    "category": "shoes",
+    "color": "brown",
+    "style": "classic",
+    "occasion": "casual",
+    "image": "/uploads/8d1adb128f474670baf5a95d679fa0e2-brown-leather-boots.jpg"
+  },
+  {
+    "id": "wardrobe-40",
+    "name": "Ethnic Wedding Juttis",
+    "category": "shoes",
+    "color": "gold",
+    "style": "ethnic",
+    "occasion": "wedding",
+    "image": "/uploads/fccc0afa8b894bdea98d556ee457568b-ethnic-wedding-juttis.jpg"
+  },
+  {
+    "id": "wardrobe-41",
+    "name": "Silver Formal Watch",
+    "category": "accessory",
+    "color": "silver",
+    "style": "classic",
+    "occasion": "formal",
+    "image": "/uploads/8d3b3221ffed4f2c957cf866b491bfeb-silver-formal-watch.jpg"
+  },
+  {
+    "id": "wardrobe-42",
+    "name": "Black Leather Belt",
+    "category": "accessory",
+    "color": "black",
+    "style": "classic",
+    "occasion": "formal",
+    "image": "/uploads/c68471ccf5a24360abafdb3a73007d2c-black-leather-belt.jpg"
+  },
+  {
+    "id": "wardrobe-43",
+    "name": "Gold Party Earrings",
+    "category": "accessory",
+    "color": "gold",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/cbc28fb616104df1a6a7cff1f8ed20c8-gold-party-earrings.jpg"
+  },
+  {
+    "id": "wardrobe-44",
+    "name": "Urban Sunglasses",
+    "category": "accessory",
+    "color": "black",
+    "style": "casual",
+    "occasion": "college",
+    "image": "/uploads/95ac4dc1bdc44daa8960012ff3b90823-urban-sunglasses.jpg"
+  },
+  {
+    "id": "wardrobe-45",
+    "name": "Minimal Tote Bag",
+    "category": "accessory",
+    "color": "beige",
+    "style": "minimal",
+    "occasion": "casual",
+    "image": "/uploads/ff87e47dd31d4a86b2d7ce0247295349-minimal-tote-bag.jpg"
+  },
+  {
+    "id": "wardrobe-46",
+    "name": "Printed Wedding Scarf",
+    "category": "accessory",
+    "color": "red",
+    "style": "ethnic",
+    "occasion": "wedding",
+    "image": "/uploads/449bf2692caf439d85fd9e9de7c7e920-printed-wedding-scarf.jpg"
+  },
+  {
+    "id": "wardrobe-47",
+    "name": "Statement Necklace",
+    "category": "accessory",
+    "color": "gold",
+    "style": "chic",
+    "occasion": "party",
+    "image": "/uploads/18a0cf17634942f787cbabdc81d49b31-statement-necklace.jpg"
+  },
+  {
+    "id": "wardrobe-48",
+    "name": "Streetwear Cap",
+    "category": "accessory",
+    "color": "black",
+    "style": "streetwear",
+    "occasion": "college",
+    "image": "/uploads/3e533540f34d4702b0c0160a069610bf-streetwear-cap.jpg"
+  },
+  {
+    "id": "wardrobe-49",
+    "name": "Evening Clutch",
+    "category": "accessory",
+    "color": "black",
+    "style": "chic",
+    "occasion": "wedding",
+    "image": "/uploads/75ff94267ef345c5a8cc6a90294d8d03-evening-clutch.jpg"
+  },
+  {
+    "id": "wardrobe-50",
+    "name": "Formal Silk Tie",
+    "category": "accessory",
+    "color": "navy",
+    "style": "formal",
+    "occasion": "formal",
+    "image": "/uploads/0b82c565455e44779a52dd42af69a976-formal-silk-tie.jpg"
+  }
+]

@@ -42,6 +42,37 @@ LABEL_TO_ITEM = {
     "tie": {"category": "accessory", "name": "Tie", "style": "formal", "occasion": "formal"},
 }
 
+FILENAME_ALIASES = {
+    "tee": "t-shirt",
+    "tshirt": "t-shirt",
+    "hoodie": "jacket",
+    "blazer": "coat",
+    "sweater": "coat",
+    "kurta": "shirt",
+    "trousers": "pants",
+    "chinos": "pants",
+    "cargo": "pants",
+    "shorts": "pants",
+    "skirt": "pants",
+    "palazzo": "pants",
+    "denim": "jeans",
+    "sneakers": "sneaker",
+    "loafers": "shoe",
+    "boots": "shoe",
+    "heels": "shoe",
+    "juttis": "shoe",
+    "jutti": "shoe",
+    "watch": "tie",
+    "belt": "tie",
+    "earrings": "tie",
+    "sunglasses": "tie",
+    "tote": "tie",
+    "scarf": "tie",
+    "necklace": "tie",
+    "cap": "tie",
+    "clutch": "tie",
+}
+
 
 def _get_model():
     global _MODEL, _MODEL_NAMES
@@ -62,6 +93,23 @@ def _get_model():
 
 def _guess_from_filename(image_path: str, color: str) -> dict[str, Any]:
     stem = os.path.splitext(os.path.basename(image_path))[0].lower()
+    for alias, canonical_label in FILENAME_ALIASES.items():
+        if alias in stem and canonical_label in LABEL_TO_ITEM:
+            item = LABEL_TO_ITEM[canonical_label]
+            return {
+                "items": [
+                    {
+                        "category": item["category"],
+                        "name": f"{color.title()} {item['name']}".strip() if color != "unknown" else item["name"],
+                        "color": color,
+                        "style": item["style"],
+                        "occasion": item["occasion"],
+                    }
+                ],
+                "labels": [alias],
+                "source": "filename",
+            }
+
     for label, item in LABEL_TO_ITEM.items():
         token = label.replace("-", "")
         if label in stem or token in stem:

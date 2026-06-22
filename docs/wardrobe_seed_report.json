@@ -1,0 +1,1696 @@
+{
+  "generated_at": "2026-05-24T16:14:10.012775",
+  "project_root": "D:\\Project",
+  "backup_file": "D:\\Project\\backend\\data\\wardrobe.backup_20260524_160844.json",
+  "dataset_dir": "D:\\Project\\scripts\\wardrobe_seed_images",
+  "target_count": 50,
+  "result": {
+    "deleted_ids": [
+      "wardrobe-1",
+      "wardrobe-2",
+      "wardrobe-3",
+      "wardrobe-4",
+      "wardrobe-5",
+      "wardrobe-6",
+      "wardrobe-7",
+      "wardrobe-8",
+      "wardrobe-9",
+      "wardrobe-10",
+      "wardrobe-11",
+      "wardrobe-12",
+      "wardrobe-13",
+      "wardrobe-14",
+      "wardrobe-15",
+      "wardrobe-16",
+      "wardrobe-17",
+      "wardrobe-18",
+      "wardrobe-19",
+      "wardrobe-20",
+      "wardrobe-21",
+      "wardrobe-22",
+      "wardrobe-23",
+      "wardrobe-24",
+      "wardrobe-25",
+      "wardrobe-26",
+      "wardrobe-27",
+      "wardrobe-28",
+      "wardrobe-29",
+      "wardrobe-30",
+      "wardrobe-31",
+      "wardrobe-32",
+      "wardrobe-33",
+      "wardrobe-34",
+      "wardrobe-35",
+      "wardrobe-36",
+      "wardrobe-37",
+      "wardrobe-38",
+      "wardrobe-39",
+      "wardrobe-40",
+      "wardrobe-41",
+      "wardrobe-42",
+      "wardrobe-43",
+      "wardrobe-44",
+      "wardrobe-45",
+      "wardrobe-46",
+      "wardrobe-47",
+      "wardrobe-48",
+      "wardrobe-49",
+      "wardrobe-50"
+    ],
+    "added_count": 50,
+    "added_items": [
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-1",
+        "image": "/uploads/a1fecb7b96f847fbaad3e31cbae7b28d-white-campus-tee.jpg",
+        "name": "White Campus Tee",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-2",
+        "image": "/uploads/90dcc899af0c42dab7a40b5c0ac08e3f-white-minimal-tee.jpg",
+        "name": "White Minimal Tee",
+        "occasion": "casual",
+        "style": "minimal"
+      },
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-3",
+        "image": "/uploads/d2e35519c816411eae2b82aa2874083b-white-weekend-tee.jpg",
+        "name": "White Weekend Tee",
+        "occasion": "casual",
+        "style": "casual"
+      },
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-4",
+        "image": "/uploads/97e76ebc594546308aea5cfffc4eb47a-white-layering-tee.jpg",
+        "name": "White Layering Tee",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-5",
+        "image": "/uploads/e70ddda5d571433a890d6af6410c0a54-white-basics-tee.jpg",
+        "name": "White Basics Tee",
+        "occasion": "casual",
+        "style": "smart-casual"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-6",
+        "image": "/uploads/dc23dcdf7bef46238db431a291acedae-blue-street-jeans.jpg",
+        "name": "Blue Street Jeans",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-7",
+        "image": "/uploads/c005c22831444c28b808f1462e9571a9-blue-everyday-jeans.jpg",
+        "name": "Blue Everyday Jeans",
+        "occasion": "casual",
+        "style": "casual"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-8",
+        "image": "/uploads/9edf0e9db75145a0b616b53d524c147e-blue-weekend-denim.jpg",
+        "name": "Blue Weekend Denim",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-9",
+        "image": "/uploads/199cd1c070434c18be53c177db0e7640-blue-relaxed-jeans.jpg",
+        "name": "Blue Relaxed Jeans",
+        "occasion": "casual",
+        "style": "streetwear"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-10",
+        "image": "/uploads/fa6a7f86c7a84f2e9218aebd6338b090-blue-classic-jeans.jpg",
+        "name": "Blue Classic Jeans",
+        "occasion": "college",
+        "style": "classic"
+      },
+      {
+        "category": "shoes",
+        "color": "red",
+        "id": "wardrobe-11",
+        "image": "/uploads/25c1c355305b4002b26aa967f50688db-red-flex-sneaker.jpg",
+        "name": "Red Flex Sneaker",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "shoes",
+        "color": "red",
+        "id": "wardrobe-12",
+        "image": "/uploads/df80c9ae36d34ec19ff45391aa86e123-red-training-sneaker.jpg",
+        "name": "Red Training Sneaker",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "shoes",
+        "color": "red",
+        "id": "wardrobe-13",
+        "image": "/uploads/1f0011b73a044435a8980b8d6e18c9a1-red-sport-sneaker.jpg",
+        "name": "Red Sport Sneaker",
+        "occasion": "casual",
+        "style": "streetwear"
+      },
+      {
+        "category": "shoes",
+        "color": "red",
+        "id": "wardrobe-14",
+        "image": "/uploads/9201ee7cac7b4ac1bad1dab0fe2c4bc9-red-daily-sneaker.jpg",
+        "name": "Red Daily Sneaker",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "shoes",
+        "color": "red",
+        "id": "wardrobe-15",
+        "image": "/uploads/8e10cf47ff0945fea1415e47fb3d7c26-red-statement-sneaker.jpg",
+        "name": "Red Statement Sneaker",
+        "occasion": "party",
+        "style": "streetwear"
+      },
+      {
+        "category": "top",
+        "color": "black",
+        "id": "wardrobe-16",
+        "image": "/uploads/fade3e968eeb4b6a8aac95fa0238d578-black-oxford-shirt.jpg",
+        "name": "Black Oxford Shirt",
+        "occasion": "formal",
+        "style": "classic"
+      },
+      {
+        "category": "top",
+        "color": "beige",
+        "id": "wardrobe-17",
+        "image": "/uploads/4db18de94b2243ba96a6d59dfe7b7f5c-beige-linen-shirt.jpg",
+        "name": "Beige Linen Shirt",
+        "occasion": "casual",
+        "style": "minimal"
+      },
+      {
+        "category": "top",
+        "color": "blue",
+        "id": "wardrobe-18",
+        "image": "/uploads/e63d0cde81b64251b8429059fd0c949f-blue-denim-jacket.jpg",
+        "name": "Blue Denim Jacket",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "top",
+        "color": "olive",
+        "id": "wardrobe-19",
+        "image": "/uploads/263914cc89fd41dc8711ce73776aea11-olive-bomber-jacket.jpg",
+        "name": "Olive Bomber Jacket",
+        "occasion": "party",
+        "style": "streetwear"
+      },
+      {
+        "category": "top",
+        "color": "white",
+        "id": "wardrobe-20",
+        "image": "/uploads/a739125d802641478757543877e7ec1c-white-festive-kurta.jpg",
+        "name": "White Festive Kurta",
+        "occasion": "wedding",
+        "style": "ethnic"
+      },
+      {
+        "category": "top",
+        "color": "grey",
+        "id": "wardrobe-21",
+        "image": "/uploads/50b501edb764458782530a3b07e1299a-grey-city-hoodie.jpg",
+        "name": "Grey City Hoodie",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "top",
+        "color": "navy",
+        "id": "wardrobe-22",
+        "image": "/uploads/49b21af4c4d144cbb6d68d254d3d9b39-navy-sharp-blazer.jpg",
+        "name": "Navy Sharp Blazer",
+        "occasion": "formal",
+        "style": "smart-casual"
+      },
+      {
+        "category": "top",
+        "color": "cream",
+        "id": "wardrobe-23",
+        "image": "/uploads/370d75ce77244ba28a689bb6986bf1eb-cream-cozy-sweater.jpg",
+        "name": "Cream Cozy Sweater",
+        "occasion": "casual",
+        "style": "chic"
+      },
+      {
+        "category": "top",
+        "color": "green",
+        "id": "wardrobe-24",
+        "image": "/uploads/4d2faa99960c4b7d8b556c34a2d4c538-emerald-party-top.jpg",
+        "name": "Emerald Party Top",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "top",
+        "color": "black",
+        "id": "wardrobe-25",
+        "image": "/uploads/8f3f235374f64184a9ebff34adabd193-black-winter-coat.jpg",
+        "name": "Black Winter Coat",
+        "occasion": "formal",
+        "style": "formal"
+      },
+      {
+        "category": "bottom",
+        "color": "black",
+        "id": "wardrobe-26",
+        "image": "/uploads/53eca2dc283c423a82f2af791a514840-tailored-black-trousers.jpg",
+        "name": "Tailored Black Trousers",
+        "occasion": "formal",
+        "style": "formal"
+      },
+      {
+        "category": "bottom",
+        "color": "beige",
+        "id": "wardrobe-27",
+        "image": "/uploads/5d428777b4304ecda7aa32e1211d9829-beige-casual-chinos.jpg",
+        "name": "Beige Casual Chinos",
+        "occasion": "casual",
+        "style": "smart-casual"
+      },
+      {
+        "category": "bottom",
+        "color": "olive",
+        "id": "wardrobe-28",
+        "image": "/uploads/3dec94ede3ff43c4b561adeeba650ce7-olive-cargo-pants.jpg",
+        "name": "Olive Cargo Pants",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "bottom",
+        "color": "grey",
+        "id": "wardrobe-29",
+        "image": "/uploads/2b0ddbe8d92f42a6a6be10f98453266d-grey-office-pants.jpg",
+        "name": "Grey Office Pants",
+        "occasion": "formal",
+        "style": "classic"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-30",
+        "image": "/uploads/4b56aa38942a413096920c98ca97b211-wide-leg-denim.jpg",
+        "name": "Wide Leg Denim",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "bottom",
+        "color": "black",
+        "id": "wardrobe-31",
+        "image": "/uploads/d182e395cad04a0fa94a2f12dc1be21a-pleated-chic-trousers.jpg",
+        "name": "Pleated Chic Trousers",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "bottom",
+        "color": "maroon",
+        "id": "wardrobe-32",
+        "image": "/uploads/a6c9e4bb9dd049858f8a2a6e67448040-festive-palazzo.jpg",
+        "name": "Festive Palazzo",
+        "occasion": "wedding",
+        "style": "ethnic"
+      },
+      {
+        "category": "bottom",
+        "color": "black",
+        "id": "wardrobe-33",
+        "image": "/uploads/15a7deefd62441d5967ee03645245efa-black-summer-shorts.jpg",
+        "name": "Black Summer Shorts",
+        "occasion": "casual",
+        "style": "casual"
+      },
+      {
+        "category": "bottom",
+        "color": "white",
+        "id": "wardrobe-34",
+        "image": "/uploads/a323109b82a04d3486ec122347c7814d-white-flow-skirt.jpg",
+        "name": "White Flow Skirt",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "bottom",
+        "color": "blue",
+        "id": "wardrobe-35",
+        "image": "/uploads/7b44e80e4d0b4ff6af127dc1e5f9cb06-blue-classic-jeans-plus.jpg",
+        "name": "Blue Classic Jeans Plus",
+        "occasion": "casual",
+        "style": "classic"
+      },
+      {
+        "category": "shoes",
+        "color": "white",
+        "id": "wardrobe-36",
+        "image": "/uploads/cc1e44521d7343688f91fc73433d88a8-white-court-sneakers.jpg",
+        "name": "White Court Sneakers",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "shoes",
+        "color": "black",
+        "id": "wardrobe-37",
+        "image": "/uploads/79b7702b372a49acac4fd7887044a48e-black-formal-loafers.jpg",
+        "name": "Black Formal Loafers",
+        "occasion": "formal",
+        "style": "formal"
+      },
+      {
+        "category": "shoes",
+        "color": "tan",
+        "id": "wardrobe-38",
+        "image": "/uploads/443dcbcf01fa4bd6b60b64ba388159b5-tan-party-heels.jpg",
+        "name": "Tan Party Heels",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "shoes",
+        "color": "brown",
+        "id": "wardrobe-39",
+        "image": "/uploads/83193a95f95346dfb7979fdb8b12ea26-brown-leather-boots.jpg",
+        "name": "Brown Leather Boots",
+        "occasion": "casual",
+        "style": "classic"
+      },
+      {
+        "category": "shoes",
+        "color": "gold",
+        "id": "wardrobe-40",
+        "image": "/uploads/e2b93eda823d4ed0b3a8b0684e05e4dd-ethnic-wedding-juttis.jpg",
+        "name": "Ethnic Wedding Juttis",
+        "occasion": "wedding",
+        "style": "ethnic"
+      },
+      {
+        "category": "accessory",
+        "color": "silver",
+        "id": "wardrobe-41",
+        "image": "/uploads/86fae2db4afa48a69214cc85cdc809c0-silver-formal-watch.jpg",
+        "name": "Silver Formal Watch",
+        "occasion": "formal",
+        "style": "classic"
+      },
+      {
+        "category": "accessory",
+        "color": "black",
+        "id": "wardrobe-42",
+        "image": "/uploads/464f2c5b6cdf4feb9147b0abac9f3543-black-leather-belt.jpg",
+        "name": "Black Leather Belt",
+        "occasion": "formal",
+        "style": "classic"
+      },
+      {
+        "category": "accessory",
+        "color": "gold",
+        "id": "wardrobe-43",
+        "image": "/uploads/b889e97b4ecf4cf097b85675083fe9ed-gold-party-earrings.jpg",
+        "name": "Gold Party Earrings",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "accessory",
+        "color": "black",
+        "id": "wardrobe-44",
+        "image": "/uploads/b0717c90a5834bb19922e613256bb2ff-urban-sunglasses.jpg",
+        "name": "Urban Sunglasses",
+        "occasion": "college",
+        "style": "casual"
+      },
+      {
+        "category": "accessory",
+        "color": "beige",
+        "id": "wardrobe-45",
+        "image": "/uploads/866e6451d7db43a9be92e569050a4507-minimal-tote-bag.jpg",
+        "name": "Minimal Tote Bag",
+        "occasion": "casual",
+        "style": "minimal"
+      },
+      {
+        "category": "accessory",
+        "color": "red",
+        "id": "wardrobe-46",
+        "image": "/uploads/16ef305cdd70418c80e680beee8d6491-printed-wedding-scarf.jpg",
+        "name": "Printed Wedding Scarf",
+        "occasion": "wedding",
+        "style": "ethnic"
+      },
+      {
+        "category": "accessory",
+        "color": "gold",
+        "id": "wardrobe-47",
+        "image": "/uploads/730eb2a089f7439296f65bef475cacd4-statement-necklace.jpg",
+        "name": "Statement Necklace",
+        "occasion": "party",
+        "style": "chic"
+      },
+      {
+        "category": "accessory",
+        "color": "black",
+        "id": "wardrobe-48",
+        "image": "/uploads/72734a95c58e47f39950225c9c84452c-streetwear-cap.jpg",
+        "name": "Streetwear Cap",
+        "occasion": "college",
+        "style": "streetwear"
+      },
+      {
+        "category": "accessory",
+        "color": "black",
+        "id": "wardrobe-49",
+        "image": "/uploads/b881d30e76744ac2ba6654d17cedfde2-evening-clutch.jpg",
+        "name": "Evening Clutch",
+        "occasion": "wedding",
+        "style": "chic"
+      },
+      {
+        "category": "accessory",
+        "color": "navy",
+        "id": "wardrobe-50",
+        "image": "/uploads/102c9168f75d43d99c23b303a7144e2b-formal-silk-tie.jpg",
+        "name": "Formal Silk Tie",
+        "occasion": "formal",
+        "style": "formal"
+      }
+    ],
+    "detection_summary": [
+      {
+        "name": "White Campus Tee",
+        "category": "top",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-campus-tee.jpg",
+        "saved_image": "/uploads/a1fecb7b96f847fbaad3e31cbae7b28d-white-campus-tee.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "T-Shirt",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "tee"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Minimal Tee",
+        "category": "top",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-minimal-tee.jpg",
+        "saved_image": "/uploads/90dcc899af0c42dab7a40b5c0ac08e3f-white-minimal-tee.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "T-Shirt",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "tee"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Weekend Tee",
+        "category": "top",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-weekend-tee.jpg",
+        "saved_image": "/uploads/d2e35519c816411eae2b82aa2874083b-white-weekend-tee.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "T-Shirt",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "tee"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Layering Tee",
+        "category": "top",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-layering-tee.jpg",
+        "saved_image": "/uploads/97e76ebc594546308aea5cfffc4eb47a-white-layering-tee.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "T-Shirt",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "tee"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Basics Tee",
+        "category": "top",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-basics-tee.jpg",
+        "saved_image": "/uploads/e70ddda5d571433a890d6af6410c0a54-white-basics-tee.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "T-Shirt",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "tee"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Street Jeans",
+        "category": "bottom",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-street-jeans.jpg",
+        "saved_image": "/uploads/dc23dcdf7bef46238db431a291acedae-blue-street-jeans.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jeans"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Everyday Jeans",
+        "category": "bottom",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-everyday-jeans.jpg",
+        "saved_image": "/uploads/c005c22831444c28b808f1462e9571a9-blue-everyday-jeans.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jeans"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Weekend Denim",
+        "category": "bottom",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-weekend-denim.jpg",
+        "saved_image": "/uploads/9edf0e9db75145a0b616b53d524c147e-blue-weekend-denim.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "denim"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Relaxed Jeans",
+        "category": "bottom",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-relaxed-jeans.jpg",
+        "saved_image": "/uploads/199cd1c070434c18be53c177db0e7640-blue-relaxed-jeans.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jeans"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Classic Jeans",
+        "category": "bottom",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-classic-jeans.jpg",
+        "saved_image": "/uploads/fa6a7f86c7a84f2e9218aebd6338b090-blue-classic-jeans.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jeans"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Red Flex Sneaker",
+        "category": "shoes",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\red-flex-sneaker.jpg",
+        "saved_image": "/uploads/25c1c355305b4002b26aa967f50688db-red-flex-sneaker.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneaker"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Red Training Sneaker",
+        "category": "shoes",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\red-training-sneaker.jpg",
+        "saved_image": "/uploads/df80c9ae36d34ec19ff45391aa86e123-red-training-sneaker.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneaker"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Red Sport Sneaker",
+        "category": "shoes",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\red-sport-sneaker.jpg",
+        "saved_image": "/uploads/1f0011b73a044435a8980b8d6e18c9a1-red-sport-sneaker.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneaker"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Red Daily Sneaker",
+        "category": "shoes",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\red-daily-sneaker.jpg",
+        "saved_image": "/uploads/9201ee7cac7b4ac1bad1dab0fe2c4bc9-red-daily-sneaker.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneaker"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Red Statement Sneaker",
+        "category": "shoes",
+        "source_kind": "local",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\red-statement-sneaker.jpg",
+        "saved_image": "/uploads/8e10cf47ff0945fea1415e47fb3d7c26-red-statement-sneaker.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneaker"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Black Oxford Shirt",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\black-oxford-shirt.jpg",
+        "saved_image": "/uploads/fade3e968eeb4b6a8aac95fa0238d578-black-oxford-shirt.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Shirt",
+              "occasion": "formal",
+              "style": "classic"
+            }
+          ],
+          "labels": [
+            "shirt"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Beige Linen Shirt",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\beige-linen-shirt.jpg",
+        "saved_image": "/uploads/4db18de94b2243ba96a6d59dfe7b7f5c-beige-linen-shirt.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Shirt",
+              "occasion": "formal",
+              "style": "classic"
+            }
+          ],
+          "labels": [
+            "shirt"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Denim Jacket",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-denim-jacket.jpg",
+        "saved_image": "/uploads/e63d0cde81b64251b8429059fd0c949f-blue-denim-jacket.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "denim"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Olive Bomber Jacket",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\olive-bomber-jacket.jpg",
+        "saved_image": "/uploads/263914cc89fd41dc8711ce73776aea11-olive-bomber-jacket.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Jacket",
+              "occasion": "party",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jacket"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Festive Kurta",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-festive-kurta.jpg",
+        "saved_image": "/uploads/a739125d802641478757543877e7ec1c-white-festive-kurta.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Shirt",
+              "occasion": "formal",
+              "style": "classic"
+            }
+          ],
+          "labels": [
+            "kurta"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Grey City Hoodie",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\grey-city-hoodie.jpg",
+        "saved_image": "/uploads/50b501edb764458782530a3b07e1299a-grey-city-hoodie.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Jacket",
+              "occasion": "party",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "hoodie"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Navy Sharp Blazer",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\navy-sharp-blazer.jpg",
+        "saved_image": "/uploads/49b21af4c4d144cbb6d68d254d3d9b39-navy-sharp-blazer.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Coat",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "blazer"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Cream Cozy Sweater",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\cream-cozy-sweater.jpg",
+        "saved_image": "/uploads/370d75ce77244ba28a689bb6986bf1eb-cream-cozy-sweater.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Coat",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "sweater"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Emerald Party Top",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\emerald-party-top.jpg",
+        "saved_image": "/uploads/4d2faa99960c4b7d8b556c34a2d4c538-emerald-party-top.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Clothing Item",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [],
+          "source": "fallback"
+        }
+      },
+      {
+        "name": "Black Winter Coat",
+        "category": "top",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\black-winter-coat.jpg",
+        "saved_image": "/uploads/8f3f235374f64184a9ebff34adabd193-black-winter-coat.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "top",
+              "color": "unknown",
+              "name": "Coat",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "coat"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Tailored Black Trousers",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\tailored-black-trousers.jpg",
+        "saved_image": "/uploads/53eca2dc283c423a82f2af791a514840-tailored-black-trousers.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "trousers"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Beige Casual Chinos",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\beige-casual-chinos.jpg",
+        "saved_image": "/uploads/5d428777b4304ecda7aa32e1211d9829-beige-casual-chinos.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "chinos"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Olive Cargo Pants",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\olive-cargo-pants.jpg",
+        "saved_image": "/uploads/3dec94ede3ff43c4b561adeeba650ce7-olive-cargo-pants.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "cargo"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Grey Office Pants",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\grey-office-pants.jpg",
+        "saved_image": "/uploads/2b0ddbe8d92f42a6a6be10f98453266d-grey-office-pants.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "pants"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Wide Leg Denim",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\wide-leg-denim.jpg",
+        "saved_image": "/uploads/4b56aa38942a413096920c98ca97b211-wide-leg-denim.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "denim"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Pleated Chic Trousers",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\pleated-chic-trousers.jpg",
+        "saved_image": "/uploads/d182e395cad04a0fa94a2f12dc1be21a-pleated-chic-trousers.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "trousers"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Festive Palazzo",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\festive-palazzo.jpg",
+        "saved_image": "/uploads/a6c9e4bb9dd049858f8a2a6e67448040-festive-palazzo.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "palazzo"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Black Summer Shorts",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\black-summer-shorts.jpg",
+        "saved_image": "/uploads/15a7deefd62441d5967ee03645245efa-black-summer-shorts.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "shorts"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Flow Skirt",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-flow-skirt.jpg",
+        "saved_image": "/uploads/a323109b82a04d3486ec122347c7814d-white-flow-skirt.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Pants",
+              "occasion": "college",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "skirt"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Blue Classic Jeans Plus",
+        "category": "bottom",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\blue-classic-jeans-plus.jpg",
+        "saved_image": "/uploads/7b44e80e4d0b4ff6af127dc1e5f9cb06-blue-classic-jeans-plus.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "bottom",
+              "color": "unknown",
+              "name": "Jeans",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "jeans"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "White Court Sneakers",
+        "category": "shoes",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\white-court-sneakers.jpg",
+        "saved_image": "/uploads/cc1e44521d7343688f91fc73433d88a8-white-court-sneakers.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Sneakers",
+              "occasion": "college",
+              "style": "streetwear"
+            }
+          ],
+          "labels": [
+            "sneakers"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Black Formal Loafers",
+        "category": "shoes",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\black-formal-loafers.jpg",
+        "saved_image": "/uploads/79b7702b372a49acac4fd7887044a48e-black-formal-loafers.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Shoes",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "loafers"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Tan Party Heels",
+        "category": "shoes",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\tan-party-heels.jpg",
+        "saved_image": "/uploads/443dcbcf01fa4bd6b60b64ba388159b5-tan-party-heels.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Shoes",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "heels"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Brown Leather Boots",
+        "category": "shoes",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\brown-leather-boots.jpg",
+        "saved_image": "/uploads/83193a95f95346dfb7979fdb8b12ea26-brown-leather-boots.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Shoes",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "boots"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Ethnic Wedding Juttis",
+        "category": "shoes",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\ethnic-wedding-juttis.jpg",
+        "saved_image": "/uploads/e2b93eda823d4ed0b3a8b0684e05e4dd-ethnic-wedding-juttis.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "shoes",
+              "color": "unknown",
+              "name": "Shoes",
+              "occasion": "casual",
+              "style": "casual"
+            }
+          ],
+          "labels": [
+            "juttis"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Silver Formal Watch",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\silver-formal-watch.jpg",
+        "saved_image": "/uploads/86fae2db4afa48a69214cc85cdc809c0-silver-formal-watch.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "watch"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Black Leather Belt",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\black-leather-belt.jpg",
+        "saved_image": "/uploads/464f2c5b6cdf4feb9147b0abac9f3543-black-leather-belt.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "belt"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Gold Party Earrings",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\gold-party-earrings.jpg",
+        "saved_image": "/uploads/b889e97b4ecf4cf097b85675083fe9ed-gold-party-earrings.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "earrings"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Urban Sunglasses",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\urban-sunglasses.jpg",
+        "saved_image": "/uploads/b0717c90a5834bb19922e613256bb2ff-urban-sunglasses.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "sunglasses"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Minimal Tote Bag",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\minimal-tote-bag.jpg",
+        "saved_image": "/uploads/866e6451d7db43a9be92e569050a4507-minimal-tote-bag.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "tote"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Printed Wedding Scarf",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\printed-wedding-scarf.jpg",
+        "saved_image": "/uploads/16ef305cdd70418c80e680beee8d6491-printed-wedding-scarf.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "scarf"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Statement Necklace",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\statement-necklace.jpg",
+        "saved_image": "/uploads/730eb2a089f7439296f65bef475cacd4-statement-necklace.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "necklace"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Streetwear Cap",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\streetwear-cap.jpg",
+        "saved_image": "/uploads/72734a95c58e47f39950225c9c84452c-streetwear-cap.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "cap"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Evening Clutch",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\evening-clutch.jpg",
+        "saved_image": "/uploads/b881d30e76744ac2ba6654d17cedfde2-evening-clutch.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "clutch"
+          ],
+          "source": "filename"
+        }
+      },
+      {
+        "name": "Formal Silk Tie",
+        "category": "accessory",
+        "source_kind": "download",
+        "download_url": null,
+        "source_path": "D:\\Project\\scripts\\wardrobe_seed_images\\formal-silk-tie.jpg",
+        "saved_image": "/uploads/102c9168f75d43d99c23b303a7144e2b-formal-silk-tie.jpg",
+        "analysis": {
+          "items": [
+            {
+              "category": "accessory",
+              "color": "unknown",
+              "name": "Tie",
+              "occasion": "formal",
+              "style": "formal"
+            }
+          ],
+          "labels": [
+            "tie"
+          ],
+          "source": "filename"
+        }
+      }
+    ],
+    "generation_checks": [
+      {
+        "occasion": "college",
+        "style": "streetwear",
+        "count": 8,
+        "top_score": 16.5
+      },
+      {
+        "occasion": "casual",
+        "style": "minimal",
+        "count": 8,
+        "top_score": 15.0
+      },
+      {
+        "occasion": "formal",
+        "style": "classic",
+        "count": 8,
+        "top_score": 16.5
+      },
+      {
+        "occasion": "party",
+        "style": "chic",
+        "count": 8,
+        "top_score": 16.5
+      },
+      {
+        "occasion": "wedding",
+        "style": "ethnic",
+        "count": 8,
+        "top_score": 16.5
+      }
+    ]
+  }
+}

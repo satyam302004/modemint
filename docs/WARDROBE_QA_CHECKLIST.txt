@@ -1,0 +1,221 @@
+ModeMint - Wardrobe QA Checklist
+Project root: D:\Project\
+
+Purpose
+Use this checklist to validate the wardrobe feature after seeding about 50 items.
+
+Current seeded wardrobe target
+- Total items: 50
+- Categories:
+  - 15 tops
+  - 15 bottoms
+  - 10 shoes
+  - 10 accessories
+
+Important files
+- Wardrobe data: D:\Project\backend\data\wardrobe.json
+- Seed report: D:\Project\docs\wardrobe_seed_report.json
+- Seed image set: D:\Project\scripts\wardrobe_seed_images\
+- Backup files:
+  - D:\Project\backend\data\wardrobe.backup_20260524_140640.json
+  - D:\Project\backend\data\wardrobe.backup_20260524_141407.json
+
+1. Pre-checks
+1. Confirm the app is running:
+   - http://localhost:5000/
+2. Confirm the wardrobe data file exists:
+   - D:\Project\backend\data\wardrobe.json
+3. Confirm the wardrobe count is 50.
+4. Confirm uploads are present in:
+   - D:\Project\backend\uploads\
+
+2. Homepage and studio load
+1. Open:
+   - http://localhost:5000/
+2. Click Enter Studio.
+3. Confirm `studio.html` loads without console-breaking errors.
+4. Confirm the tabs are visible:
+   - Generate
+   - Wardrobe
+   - Store
+   - Chat
+
+3. Wardrobe list UI checks
+1. Open the Wardrobe tab.
+2. Confirm the wardrobe list renders many cards, not just one or two.
+3. Scroll through the list and verify:
+   - images load
+   - names are visible
+   - category/color/style info is visible
+   - Remove button exists for each item
+4. Spot-check at least 10 items for correctness:
+   - 3 tops
+   - 3 bottoms
+   - 2 shoes
+   - 2 accessories
+5. Confirm no obviously broken image URLs.
+
+4. Uploaded image checks
+1. Open browser devtools Network tab.
+2. Reload the Wardrobe section.
+3. Confirm uploaded images are served from `/uploads/...`.
+4. Open 3 to 5 image URLs directly in the browser.
+5. Confirm image files are accessible and not returning 404.
+
+5. Wardrobe generation checks
+Run these combinations from the Wardrobe section and click Generate from wardrobe.
+
+Test set A
+- Occasion: college
+- Style: streetwear
+Expected:
+- outfits should appear
+- top result should feel streetwear-heavy
+
+Test set B
+- Occasion: casual
+- Style: minimal
+Expected:
+- outfits should appear
+- simpler combinations should rank near the top
+
+Test set C
+- Occasion: formal
+- Style: classic
+Expected:
+- outfits should appear
+- more formal pieces should surface
+
+Test set D
+- Occasion: party
+- Style: chic
+Expected:
+- outfits should appear
+- dressier combinations should surface
+
+Test set E
+- Occasion: wedding
+- Style: ethnic
+Expected:
+- outfits should appear
+- ethnic-compatible items should appear where available
+
+For each test set verify:
+1. Result cards render
+2. Best From Wardrobe card appears
+3. Score is shown
+4. Reasons/pills are shown
+5. No JavaScript errors occur
+
+6. Wardrobe generation logic sanity checks
+1. Remove all shoes temporarily from the wardrobe file or through UI only if you intend to restore later.
+2. Click Generate from wardrobe.
+3. Confirm the UI shows that at least a top, bottom, and shoes are needed.
+4. Restore shoes after the test.
+
+If you do not want to alter data, skip this negative test.
+
+7. Add item flow checks
+1. In Wardrobe, add one manual item.
+2. Use a simple payload such as:
+   - name: Test White Shirt
+   - category: top
+   - color: white
+   - style: classic
+   - occasion: formal
+3. Submit it.
+4. Confirm:
+   - item appears in the list
+   - item is written into wardrobe.json
+   - wardrobe generation still works afterward
+
+8. Upload and analyze flow checks
+1. Upload one existing clothing image from:
+   - D:\Project\scripts\wardrobe_seed_images\
+2. Confirm the preview appears.
+3. Confirm the analysis text updates.
+4. Confirm the form fields auto-fill as much as possible.
+5. Click Add to wardrobe.
+6. Confirm the saved image path is stored in the new item.
+
+Important observation to record
+- whether the analysis source is model-based or fallback-based
+- whether category guess is accurate
+- whether color guess is usable
+
+9. Detection quality checks
+Sample 10 uploaded images and record for each:
+1. expected category
+2. detected category
+3. detected name
+4. detected color
+5. analysis source
+6. whether manual correction is needed
+
+Score each item as:
+- Pass
+- Acceptable with correction
+- Fail
+
+If most uploads require manual correction, note that wardrobe generation is still usable, but AI detection quality needs improvement.
+
+10. Delete flow checks
+1. Remove 3 wardrobe items through the UI.
+2. Confirm they disappear immediately.
+3. Confirm they are removed from wardrobe.json.
+4. Refresh the page.
+5. Confirm they do not reappear.
+
+11. Persistence checks
+1. Close and reopen the browser.
+2. Reload `http://localhost:5000/studio.html`.
+3. Confirm wardrobe items persist.
+4. Confirm favorites still persist if any were saved.
+5. Restart the app.
+6. Reload the page.
+7. Confirm wardrobe still persists.
+
+12. Performance checks
+1. With 50 items loaded, confirm the Wardrobe tab remains scrollable.
+2. Confirm no major lag when switching tabs.
+3. Confirm Generate from wardrobe completes in a reasonable time.
+4. Confirm images do not cause major layout breakage.
+
+13. Regression checks outside wardrobe
+1. Generate tab still works
+2. Store tab still loads products and trends
+3. Chat tab still returns a response
+4. Favorites can still be saved and removed
+
+14. API spot checks
+Use these endpoints directly if needed:
+- GET http://localhost:5000/wardrobe
+- POST http://localhost:5000/wardrobe
+- POST http://localhost:5000/wardrobe/upload
+- POST http://localhost:5000/wardrobe/generate
+- DELETE http://localhost:5000/wardrobe/<id>
+
+15. What success looks like
+The wardrobe feature is considered healthy if:
+1. 50 items render correctly in the UI
+2. uploaded images are accessible
+3. wardrobe generation returns outfits across multiple occasion/style pairs
+4. add/delete flows work
+5. data persists after reload and restart
+6. no major console or server errors appear
+
+16. Current known caveat
+The wardrobe feature itself works with the seeded dataset.
+However, clothing detection may still rely heavily on fallback behavior rather than strong fashion-specific AI recognition.
+
+This means:
+- wardrobe generation can still be validated properly
+- detection quality should be treated as a separate improvement area
+
+17. Optional next steps after QA
+1. Add a dedicated detection accuracy report
+2. Improve fallback alias mapping further
+3. Replace or fine-tune the detection model for fashion-specific labels
+4. Add automated tests for wardrobe endpoints
+
+End of file

@@ -186,6 +186,9 @@ def score_outfit(
     return outfit
 
 def recommend_outfits(occasion: str, style: str, budget: int) -> list[dict[str, Any]]:
+    return recommend_outfits_with_limit(occasion, style, budget, limit=6)
+
+def recommend_outfits_with_limit(occasion: str, style: str, budget: int, limit: int) -> list[dict[str, Any]]:
     products = load_products()
     shortlisted = filter_products(products, occasion, style, budget)
 
@@ -203,7 +206,7 @@ def recommend_outfits(occasion: str, style: str, budget: int) -> list[dict[str, 
         outfits.append(score_outfit(items, occasion, style, budget))
 
     outfits.sort(key=lambda outfit: (outfit["score"], outfit["trend_score"]), reverse=True)
-    return outfits[:6]
+    return outfits[: max(1, limit)]
 
 def score_wardrobe_outfit(
     items: dict[str, dict[str, Any]],

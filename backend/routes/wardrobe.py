@@ -1,4 +1,5 @@
 import os
+import re
 import uuid
 from typing import Any
 
@@ -46,7 +47,9 @@ def upload_wardrobe_image() -> Any:
     extension = os.path.splitext(image.filename)[1].lower() or ".jpg"
     if extension not in ALLOWED_IMAGE_EXTENSIONS:
         return jsonify({"error": "Only JPG, JPEG, PNG, and WEBP images are supported"}), 400
-    filename = f"{uuid.uuid4().hex}{extension}"
+    original_stem = os.path.splitext(image.filename)[0].strip().lower()
+    sanitized_stem = re.sub(r"[^a-z0-9]+", "-", original_stem).strip("-") or "upload"
+    filename = f"{uuid.uuid4().hex}-{sanitized_stem}{extension}"
     saved_path = os.path.join(UPLOADS_DIR, filename)
     image.save(saved_path)
     inferred = detect_clothing(saved_path)

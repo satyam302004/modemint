@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ModeMint Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    * { scrollbar-width: thin; scrollbar-color: #27272a transparent; }
+    @keyframes pulse-dot { 0%, 80%, 100% { opacity: 0.3; } 40% { opacity: 1; } }
+    .dot-pulse span { animation: pulse-dot 1.4s infinite; }
+    .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+    .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+    .fade-in { animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .skeleton { background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+</head>
+<body class="bg-[#09090b] text-zinc-50 font-sans antialiased min-h-screen">
+
+  <!-- ===== DESKTOP SIDEBAR ===== -->
+  <aside class="fixed left-0 top-0 h-full w-60 bg-[#09090b] border-r border-zinc-800 z-40 hidden md:flex flex-col">
+    <div class="p-5 border-b border-zinc-800">
+      <div class="flex items-center gap-2.5">
+        <div class="h-2 w-2 rounded-full bg-zinc-50"></div>
+        <span class="text-sm font-semibold tracking-tight">ModeMint</span>
+      </div>
+      <p class="text-xs text-zinc-500 mt-1.5">AI Styling Studio</p>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-1">
+      <button class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors bg-zinc-800 text-zinc-50" data-tab="generate">
+        <i data-lucide="sparkles" class="h-4 w-4 shrink-0"></i>
+        <span>Generate</span>
+      </button>
+      <button class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors text-zinc-400 hover:text-zinc-50 hover:bg-zinc-800/50" data-tab="wardrobe">
+        <i data-lucide="shirt" class="h-4 w-4 shrink-0"></i>
+        <span>Wardrobe</span>
+      </button>
+      <button class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors text-zinc-400 hover:text-zinc-50 hover:bg-zinc-800/50" data-tab="store">
+        <i data-lucide="store" class="h-4 w-4 shrink-0"></i>
+        <span>Store</span>
+      </button>
+      <button class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors text-zinc-400 hover:text-zinc-50 hover:bg-zinc-800/50" data-tab="chat">
+        <i data-lucide="message-square-text" class="h-4 w-4 shrink-0"></i>
+        <span>Chat</span>
+      </button>
+    </nav>
+    <div class="p-4 border-t border-zinc-800">
+      <a href="index.html" class="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
+        <i data-lucide="arrow-left" class="h-3 w-3"></i>
+        Back to home
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="md:ml-60 pb-16 md:pb-0 min-h-screen">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden sticky top-0 z-30 bg-[#09090b]/90 backdrop-blur-sm border-b border-zinc-800 px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="h-2 w-2 rounded-full bg-zinc-50"></div>
+        <span class="text-sm font-semibold tracking-tight">ModeMint</span>
+      </div>
+      <span class="text-xs text-zinc-500" id="mobileSectionLabel">Generate</span>
+    </header>
+
+    <!-- Stats Bar -->
+    <section class="px-4 md:px-6 pt-4 md:pt-6 pb-2">
+      <div class="grid grid-cols-3 gap-3 md:gap-4">
+        <div class="rounded-lg border border-zinc-800 bg-zinc-900 p-3 md:p-4">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">Outfits</span>
+          <p class="text-xl md:text-2xl font-bold text-zinc-50 mt-1" id="resultCount">0</p>
+        </div>
+        <div class="rounded-lg border border-zinc-800 bg-zinc-900 p-3 md:p-4">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">Favorites</span>
+          <p class="text-xl md:text-2xl font-bold text-zinc-50 mt-1" id="favoriteCount">0</p>
+        </div>
+        <div class="rounded-lg border border-zinc-800 bg-zinc-900 p-3 md:p-4">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">Top Trend</span>
+          <p class="text-xl md:text-2xl font-bold text-zinc-50 mt-1" id="topTrendScore">0.0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTIONS ===== -->
+    <main class="px-4 md:px-6 pt-3 md:pt-4 pb-6 space-y-6">
+
+      <!-- ---- GENERATE ---- -->
+      <div data-section="generate">
+        <div class="mb-5">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">Generate Outfit</span>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mt-0.5">Recommendation Console</h2>
+          <p class="text-xs md:text-sm text-zinc-500 mt-1" id="resultsSummary">Pick your filters and generate looks.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-5">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Occasion</label>
+              <select id="occasion" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+                <option value="wedding">Wedding</option>
+                <option value="casual">Casual</option>
+                <option value="party">Party</option>
+                <option value="college" selected>College</option>
+                <option value="formal">Formal</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Budget (Rs.)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">&#8377;</span>
+                <input id="budget" type="number" min="500" step="100" value="5000" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 pl-8 pr-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Style preference</label>
+              <select id="style" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+                <option value="minimal" selected>Minimal</option>
+                <option value="streetwear">Streetwear</option>
+                <option value="ethnic">Ethnic</option>
+                <option value="classic">Classic</option>
+                <option value="chic">Chic</option>
+                <option value="smart-casual">Smart Casual</option>
+              </select>
+            </div>
+            <div class="space-y-2.5 pt-1">
+              <button id="recommendButton" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black hover:bg-zinc-200 transition-colors">
+                <i data-lucide="wand-2" class="h-4 w-4"></i>
+                Generate Outfits
+              </button>
+              <button id="presetCollege" class="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-2.5 text-sm font-medium text-zinc-100 hover:bg-zinc-700/50 transition-colors">
+                <i data-lucide="graduation-cap" class="h-4 w-4"></i>
+                College under &#8377;3,000
+              </button>
+            </div>
+          </div>
+          <div>
+            <div id="outfits" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-max"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- WARDROBE ---- -->
+      <div data-section="wardrobe" class="hidden">
+        <div class="mb-5">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">My Wardrobe</span>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mt-0.5">Closet Library</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-5">
+          <!-- Left: Add form -->
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Clothing name</label>
+              <input id="wardrobeName" type="text" placeholder="White shirt" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Category</label>
+              <select id="wardrobeCategory" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="shoes">Shoes</option>
+                <option value="accessory">Accessory</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Color</label>
+              <input id="wardrobeColor" type="text" placeholder="White" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Style</label>
+              <select id="wardrobeStyle" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+                <option value="casual">Casual</option>
+                <option value="streetwear">Streetwear</option>
+                <option value="classic">Classic</option>
+                <option value="formal">Formal</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Best occasion</label>
+              <select id="wardrobeOccasion" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors">
+                <option value="college">College</option>
+                <option value="casual">Casual</option>
+                <option value="party">Party</option>
+                <option value="formal">Formal</option>
+                <option value="wedding">Wedding</option>
+                <option value="versatile">Versatile</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs md:text-sm text-zinc-400 mb-1.5">Photo</label>
+              <div id="uploadZone" class="border-2 border-dashed border-zinc-700 rounded-lg p-6 text-center hover:border-zinc-500 transition-colors cursor-pointer mb-3">
+                <i data-lucide="upload" class="mx-auto h-6 w-6 text-zinc-500"></i>
+                <p class="mt-2 text-xs text-zinc-400">Click to upload or drag image</p>
+                <p class="text-xs text-zinc-600 mt-0.5">PNG, JPG, WEBP</p>
+                <input type="file" id="wardrobeImage" accept="image/*" class="hidden">
+              </div>
+              <div class="flex gap-2">
+                <button id="openCameraButton" type="button" class="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-xs font-medium text-zinc-100 hover:bg-zinc-700/50 transition-colors">
+                  <i data-lucide="camera" class="h-3.5 w-3.5"></i>
+                  Use Camera
+                </button>
+              </div>
+            </div>
+            <div id="cameraContainer" class="hidden relative rounded-lg overflow-hidden bg-black mb-3">
+              <video id="cameraStream" autoplay playsinline class="w-full max-h-56 object-cover"></video>
+              <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-3">
+                <button id="snapPhotoButton" type="button" class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-xs font-medium text-black hover:bg-zinc-200 transition-colors">
+                  <i data-lucide="camera" class="h-3.5 w-3.5"></i>
+                  Snap
+                </button>
+                <button id="closeCameraButton" type="button" class="inline-flex items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-xs font-medium text-zinc-100 hover:bg-zinc-700 transition-colors">
+                  Cancel
+                </button>
+              </div>
+            </div>
+            <canvas id="cameraCanvas" class="hidden"></canvas>
+            <div class="rounded-lg border border-zinc-800 bg-zinc-900 p-3 min-h-[80px]">
+              <img id="wardrobePreview" class="hidden w-full aspect-[4/3] object-cover rounded-md mb-2 bg-zinc-800" alt="Preview">
+              <p id="wardrobeAnalysis" class="text-xs text-zinc-500 leading-relaxed">Upload or snap a clothing image and the app will try to guess the details.</p>
+            </div>
+            <div class="space-y-2.5 pt-1">
+              <button id="addWardrobeButton" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black hover:bg-zinc-200 transition-colors">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+                Add to Wardrobe
+              </button>
+              <button id="generateWardrobeButton" class="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-2.5 text-sm font-medium text-zinc-100 hover:bg-zinc-700/50 transition-colors">
+                <i data-lucide="shuffle" class="h-4 w-4"></i>
+                Generate from Wardrobe
+              </button>
+            </div>
+          </div>
+          <!-- Right: Wardrobe grids -->
+          <div class="space-y-6">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-zinc-50">Wardrobe Library</h3>
+              </div>
+              <div id="wardrobeList" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+            </div>
+            <div class="border-t border-zinc-800 pt-5">
+              <h3 class="text-sm font-semibold text-zinc-50 mb-3">Wardrobe Outfits</h3>
+              <div id="wardrobeOutfits" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+            <div class="border-t border-zinc-800 pt-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-zinc-50">Favorites</h3>
+              </div>
+              <div id="favorites" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- STORE ---- -->
+      <div data-section="store" class="hidden">
+        <div class="mb-5">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">Store</span>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mt-0.5">Product Grid</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-5">
+          <div>
+            <h3 class="text-xs md:text-sm font-semibold text-zinc-50 mb-3">Trend Signals</h3>
+            <div id="trendSignals" class="space-y-3"></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs md:text-sm font-semibold text-zinc-50">Products</h3>
+              <span class="inline-flex items-center rounded-full border border-zinc-800 px-2.5 py-0.5 text-xs text-zinc-400" id="catalogCount">0 loaded</span>
+            </div>
+            <div id="catalog" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- CHAT ---- -->
+      <div data-section="chat" class="hidden">
+        <div class="mb-5">
+          <span class="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider">AI Stylist</span>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mt-0.5">Style Chat</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-5">
+          <div class="space-y-4">
+            <label class="block text-xs md:text-sm text-zinc-400">Ask your question</label>
+            <textarea id="chatInput" class="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors min-h-[140px] resize-none" placeholder="What should I wear to a college fest under 3000 in streetwear style?"></textarea>
+            <button id="chatButton" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <i data-lucide="send" class="h-4 w-4"></i>
+              Send Message
+            </button>
+          </div>
+          <div>
+            <div id="chatThread" class="rounded-lg border border-zinc-800 bg-zinc-900 p-4 h-[450px] md:h-[500px] overflow-y-auto">
+              <div class="text-center py-12">
+                <i data-lucide="message-square-text" class="mx-auto h-6 w-6 text-zinc-600"></i>
+                <p class="mt-2 text-sm text-zinc-500">Ask the AI stylist for fashion advice.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ===== MOBILE BOTTOM TAB BAR ===== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#09090b] border-t border-zinc-800 flex md:hidden h-16">
+    <button class="nav-btn flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] transition-colors bg-zinc-800 text-zinc-50" data-tab="generate">
+      <i data-lucide="sparkles" class="h-4 w-4"></i>
+      <span>Generate</span>
+    </button>
+    <button class="nav-btn flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] transition-colors text-zinc-500 hover:text-zinc-50" data-tab="wardrobe">
+      <i data-lucide="shirt" class="h-4 w-4"></i>
+      <span>Wardrobe</span>
+    </button>
+    <button class="nav-btn flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] transition-colors text-zinc-500 hover:text-zinc-50" data-tab="store">
+      <i data-lucide="store" class="h-4 w-4"></i>
+      <span>Store</span>
+    </button>
+    <button class="nav-btn flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] transition-colors text-zinc-500 hover:text-zinc-50" data-tab="chat">
+      <i data-lucide="message-square-text" class="h-4 w-4"></i>
+      <span>Chat</span>
+    </button>
+  </nav>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    lucide.createIcons();
+
+    const BASE_URL = window.location.origin;
+    const state = { catalog: [], favorites: [], lastOutfits: [] };
+    let conversation = [];
+    let currentCameraStream = null;
+
+    const $ = (id) => document.getElementById(id);
+
+    const outfitContainer = $('outfits');
+    const catalogContainer = $('catalog');
+    const favoritesContainer = $('favorites');
+    const trendSignals = $('trendSignals');
+    const wardrobeList = $('wardrobeList');
+    const wardrobeOutfits = $('wardrobeOutfits');
+    const wardrobeImageInput = $('wardrobeImage');
+    const wardrobePreview = $('wardrobePreview');
+    const wardrobeAnalysis = $('wardrobeAnalysis');
+    const chatThread = $('chatThread');
+    const resultsSummary = $('resultsSummary');
+    const resultCount = $('resultCount');
+    const favoriteCount = $('favoriteCount');
+    const topTrendScore = $('topTrendScore');
+    const cameraContainer = $('cameraContainer');
+    const cameraStream = $('cameraStream');
+    const cameraCanvas = $('cameraCanvas');
+    const uploadZone = $('uploadZone');
+    const chatInput = $('chatInput');
+    const chatButton = $('chatButton');
+
+    const TAB_LABELS = {
+      generate: 'Generate',
+      wardrobe: 'Wardrobe',
+      store: 'Store',
+      chat: 'Chat',
+    };
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    async function parseResponse(response) {
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const message = data.error || data.message || 'Request failed with status ' + response.status;
+        throw new Error(message);
+      }
+      return data;
+    }
+
+    function currency(value) {
+      return '\u20B9 ' + Number(value).toLocaleString('en-IN');
+    }
+
+    function absoluteImage(path) {
+      return path ? BASE_URL + path : '';
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll('.nav-btn').forEach(function(btn) {
+        var isActive = btn.dataset.tab === name;
+        if (btn.classList.contains('flex-1')) {
+          btn.classList.toggle('bg-zinc-800', isActive);
+          btn.classList.toggle('text-zinc-50', isActive);
+          btn.classList.toggle('text-zinc-500', !isActive);
+        } else {
+          btn.classList.toggle('bg-zinc-800', isActive);
+          btn.classList.toggle('text-zinc-50', isActive);
+          btn.classList.toggle('text-zinc-400', !isActive);
+          btn.classList.toggle('hover:bg-zinc-800/50', !isActive);
+        }
+      });
+      document.querySelectorAll('[data-section]').forEach(function(section) {
+        section.classList.toggle('hidden', section.dataset.section !== name);
+      });
+      var mobileLabel = document.getElementById('mobileSectionLabel');
+      if (mobileLabel) mobileLabel.textContent = TAB_LABELS[name] || name;
+    }
+
+    function renderMarkdown(text) {
+      var html = esc(text);
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer" class="text-zinc-300 underline underline-offset-2 hover:text-zinc-50 font-medium">$1</a>');
+      html = html.replace(/\n/g, '<br>');
+      return html;
+    }
+
+    function addMessage(role, text) {
+      conversation.push({ role: role, text: text });
+      renderConversation();
+    }
+
+    function renderConversation() {
+      chatThread.innerHTML = '';
+      if (!conversation.length) {
+        chatThread.innerHTML = '<div class="text-center py-12"><i data-lucide="message-square-text" class="mx-auto h-6 w-6 text-zinc-600"></i><p class="mt-2 text-sm text-zinc-500">Ask the AI stylist for fashion advice.</p></div>';
+        lucide.createIcons();
+        return;
+      }
+      var frag = document.createDocumentFragment();
+      conversation.forEach(function(msg) {
+        var div = document.createElement('div');
+        div.className = 'fade-in mb-4 flex ' + (msg.role === 'user' ? 'justify-end' : 'justify-start');
+        var bubble = document.createElement('div');
+        if (msg.role === 'user') {
+          bubble.className = 'bg-zinc-800 rounded-lg px-3 py-2.5 max-w-[85%] text-sm text-zinc-100';
+          bubble.textContent = msg.text;
+        } else {
+          bubble.className = 'bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2.5 max-w-[85%] text-sm text-zinc-300 leading-relaxed';
+          bubble.innerHTML = renderMarkdown(msg.text);
+        }
+        div.appendChild(bubble);
+        frag.appendChild(div);
+      });
+      chatThread.appendChild(frag);
+      chatThread.scrollTop = chatThread.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function createEmptySlot(icon, message) {
+      var div = document.createElement('div');
+      div.className = 'col-span-full text-center py-10';
+      div.innerHTML = '<i data-lucide="' + icon + '" class="mx-auto h-6 w-6 text-zinc-600"></i><p class="mt-2 text-sm text-zinc-500">' + esc(message) + '</p>';
+      return div;
+    }
+
+    function createSkeletonCards(count, cols) {
+      var html = '';
+      for (var i = 0; i < count; i++) {
+        html += '<div class="rounded-lg border border-zinc-800 bg-zinc-900 p-4 space-y-3"><div class="skeleton h-4 w-3/4 rounded"></div><div class="skeleton h-3 w-1/2 rounded"></div><div class="skeleton h-20 w-full rounded"></div><div class="skeleton h-3 w-2/3 rounded"></div></div>';
+      }
+      return html;
+    }
+
+    function renderOutfits(outfits) {
+      outfitContainer.innerHTML = '';
+      state.lastOutfits = outfits;
+      resultCount.textContent = outfits.length;
+      topTrendScore.textContent = outfits[0] ? outfits[0].trend_score.toFixed(1) : '0.0';
+      if (!outfits.length) {
+        outfitContainer.appendChild(createEmptySlot('shirt', 'No outfits matched your filters.'));
+        lucide.createIcons();
+        return;
+      }
+      var frag = document.createDocumentFragment();
+      outfits.forEach(function(outfit, i) {
+        var card = document.createElement('div');
+        card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 p-4 space-y-3' + (i === 0 ? ' ring-1 ring-zinc-600' : '');
+        var itemsHtml = '';
+        Object.entries(outfit.items).forEach(function(entry) {
+          var cat = entry[0], prod = entry[1];
+          itemsHtml += '<div class="rounded-lg bg-zinc-800/40 p-2.5 space-y-1"><span class="text-[10px] uppercase tracking-wider text-zinc-500">' + esc(cat) + '</span><p class="text-sm font-medium text-zinc-50">' + esc(prod.name) + '</p><p class="text-xs text-zinc-500">' + esc(prod.brand) + ' &middot; ' + currency(prod.price) + '</p>' + (prod.buy_link ? '<a href="' + esc(prod.buy_link) + '" target="_blank" rel="noreferrer" class="text-xs text-zinc-400 hover:text-zinc-200 underline underline-offset-2">View product</a>' : '') + '</div>';
+        });
+        var reasonsHtml = '';
+        (outfit.reasons || []).forEach(function(reason) {
+          reasonsHtml += '<span class="inline-flex items-center rounded-full bg-zinc-800/60 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(reason) + '</span>';
+        });
+        card.innerHTML =
+          '<div class="flex items-start justify-between gap-3"><div><h3 class="text-sm font-semibold text-zinc-50">' + (i === 0 ? 'Best Outfit' : 'Outfit #' + (i + 1)) + '</h3></div><span class="text-base font-bold text-zinc-50 shrink-0">' + currency(outfit.total_price) + '</span></div>' +
+          '<div class="flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">Score ' + outfit.score + '</span><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">Trend ' + outfit.trend_score + '</span></div>' +
+          '<div class="space-y-1.5">' + itemsHtml + '</div>' +
+          (reasonsHtml ? '<div class="flex flex-wrap gap-1">' + reasonsHtml + '</div>' : '') +
+          '<button class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1" data-save="' + i + '"><i data-lucide="heart" class="h-3 w-3"></i> Save to Favorites</button>';
+        frag.appendChild(card);
+      });
+      outfitContainer.appendChild(frag);
+      lucide.createIcons();
+    }
+
+    function renderFavorites() {
+      favoritesContainer.innerHTML = '';
+      favoriteCount.textContent = state.favorites.length;
+      if (!state.favorites.length) {
+        favoritesContainer.appendChild(createEmptySlot('heart', 'No favorites yet.'));
+        lucide.createIcons();
+        return;
+      }
+      var frag = document.createDocumentFragment();
+      state.favorites.forEach(function(fav) {
+        var names = Object.values(fav.outfit.items || {}).map(function(item) { return item.name; }).join(', ');
+        var card = document.createElement('div');
+        card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 p-3 flex items-center justify-between gap-3';
+        card.innerHTML =
+          '<div class="min-w-0"><p class="text-sm font-medium text-zinc-50 truncate">' + esc(fav.name) + '</p><p class="text-xs text-zinc-500 truncate mt-0.5">' + esc(names) + '</p></div>' +
+          '<button class="shrink-0 inline-flex items-center gap-1 rounded-lg border border-zinc-800 bg-zinc-800/50 px-2.5 py-1 text-xs text-zinc-400 hover:text-zinc-300 hover:bg-zinc-700/50 transition-colors" data-delete="' + esc(fav.id) + '"><i data-lucide="trash-2" class="h-3 w-3"></i></button>';
+        frag.appendChild(card);
+      });
+      favoritesContainer.appendChild(frag);
+      lucide.createIcons();
+    }
+
+    function renderWardrobe(items) {
+      wardrobeList.innerHTML = '';
+      if (!items.length) {
+        wardrobeList.appendChild(createEmptySlot('shirt', 'Your wardrobe is empty.'));
+        lucide.createIcons();
+        return;
+      }
+      var frag = document.createDocumentFragment();
+      items.forEach(function(item) {
+        var card = document.createElement('div');
+        card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 overflow-hidden';
+        var imgHtml = item.image
+          ? '<img src="' + esc(absoluteImage(item.image)) + '" alt="' + esc(item.name) + '" class="w-full aspect-[4/3] object-cover bg-zinc-800" loading="lazy">'
+          : '<div class="w-full aspect-[4/3] bg-zinc-800 flex items-center justify-center"><i data-lucide="image" class="h-6 w-6 text-zinc-600"></i></div>';
+        card.innerHTML = imgHtml +
+          '<div class="p-3 space-y-2"><h3 class="text-sm font-medium text-zinc-50 truncate">' + esc(item.name) + '</h3><div class="flex flex-wrap gap-1"><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(item.category) + '</span><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(item.color) + '</span></div><button class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors" data-delete-wardrobe="' + esc(item.id) + '">Remove</button></div>';
+        frag.appendChild(card);
+      });
+      wardrobeList.appendChild(frag);
+      lucide.createIcons();
+    }
+
+    function renderWardrobeOutfits(outfits) {
+      wardrobeOutfits.innerHTML = '';
+      if (!outfits.length) {
+        wardrobeOutfits.appendChild(createEmptySlot('shirt', 'Wardrobe needs at least a top, bottom, and shoes.'));
+        lucide.createIcons();
+        return;
+      }
+      var frag = document.createDocumentFragment();
+      outfits.forEach(function(outfit, i) {
+        var card = document.createElement('div');
+        card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 p-4 space-y-3' + (i === 0 ? ' ring-1 ring-zinc-600' : '');
+        var itemsHtml = '';
+        Object.entries(outfit.items).forEach(function(entry) {
+          var cat = entry[0], item = entry[1];
+          var img = item.image ? '<img src="' + esc(absoluteImage(item.image)) + '" alt="' + esc(item.name) + '" class="w-full aspect-[4/3] object-cover rounded-md bg-zinc-800 mb-1.5" loading="lazy">' : '';
+          itemsHtml += '<div class="rounded-lg bg-zinc-800/40 p-2.5 space-y-1">' + img + '<span class="text-[10px] uppercase tracking-wider text-zinc-500">' + esc(cat) + '</span><p class="text-sm font-medium text-zinc-50">' + esc(item.name) + '</p><p class="text-xs text-zinc-500">' + esc(item.color) + ' &middot; ' + esc(item.style) + '</p></div>';
+        });
+        var reasonsHtml = '';
+        (outfit.reasons || []).forEach(function(reason) {
+          reasonsHtml += '<span class="inline-flex items-center rounded-full bg-zinc-800/60 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(reason) + '</span>';
+        });
+        card.innerHTML =
+          '<div class="flex items-center justify-between"><h3 class="text-sm font-semibold text-zinc-50">' + (i === 0 ? 'Best From Wardrobe' : 'Wardrobe Outfit') + '</h3><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">Score ' + outfit.score + '</span></div>' +
+          '<div class="space-y-1.5">' + itemsHtml + '</div>' +
+          (reasonsHtml ? '<div class="flex flex-wrap gap-1">' + reasonsHtml + '</div>' : '');
+        frag.appendChild(card);
+      });
+      wardrobeOutfits.appendChild(frag);
+      lucide.createIcons();
+    }
+
+    function renderCatalog() {
+      catalogContainer.innerHTML = '';
+      if (!state.catalog.length) {
+        catalogContainer.appendChild(createEmptySlot('package', 'No products loaded yet.'));
+        lucide.createIcons();
+        return;
+      }
+      var sorted = state.catalog.slice().sort(function(a, b) { return b.trend_score - a.trend_score; });
+      var frag = document.createDocumentFragment();
+      sorted.forEach(function(product) {
+        var card = document.createElement('div');
+        card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 p-4 space-y-2';
+        card.innerHTML =
+          '<div class="flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(product.category) + '</span><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">Trend ' + product.trend_score + '</span></div>' +
+          '<h3 class="text-sm font-semibold text-zinc-50">' + esc(product.name) + '</h3>' +
+          '<p class="text-xs text-zinc-500">' + esc(product.brand) + ' &middot; ' + esc(product.designer_type) + '</p>' +
+          '<p class="text-xs text-zinc-400 line-clamp-2">' + esc(product.description) + '</p>' +
+          '<p class="text-base font-bold text-zinc-50">' + currency(product.price) + '</p>' +
+          (product.buy_link ? '<a href="' + esc(product.buy_link) + '" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 underline underline-offset-2 transition-colors"><i data-lucide="external-link" class="h-3 w-3"></i> View Product</a>' : '');
+        frag.appendChild(card);
+      });
+      catalogContainer.appendChild(frag);
+      $('catalogCount').textContent = state.catalog.length + ' loaded';
+      lucide.createIcons();
+    }
+
+    async function loadTrends() {
+      try {
+        var response = await fetch(BASE_URL + '/trends');
+        var trends = await parseResponse(response);
+        trendSignals.innerHTML = '';
+        if (!trends.length) {
+          trendSignals.appendChild(createEmptySlot('trending-up', 'No trend signals loaded yet.'));
+          lucide.createIcons();
+          return;
+        }
+        var frag = document.createDocumentFragment();
+        trends.slice(0, 6).forEach(function(trend) {
+          var card = document.createElement('div');
+          card.className = 'rounded-lg border border-zinc-800 bg-zinc-900 p-3 space-y-2';
+          var stylesHtml = '';
+          (trend.styles || []).slice(0, 3).forEach(function(s) {
+            stylesHtml += '<span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">' + esc(s) + '</span>';
+          });
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-2"><h4 class="text-sm font-medium text-zinc-50">' + esc(trend.keyword) + '</h4><span class="inline-flex items-center rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400 shrink-0">Score ' + trend.score + '</span></div>' +
+            '<p class="text-[10px] text-zinc-500 uppercase tracking-wider">' + esc(trend.region) + ' &middot; ' + esc(trend.season) + '</p>' +
+            (stylesHtml ? '<div class="flex flex-wrap gap-1">' + stylesHtml + '</div>' : '') +
+            (trend.notes ? '<p class="text-xs text-zinc-400">' + esc(trend.notes) + '</p>' : '');
+          frag.appendChild(card);
+        });
+        trendSignals.appendChild(frag);
+        lucide.createIcons();
+      } catch (error) {
+        trendSignals.innerHTML = '';
+        trendSignals.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+    }
+
+    async function loadCatalog() {
+      try {
+        var response = await fetch(BASE_URL + '/products');
+        state.catalog = await parseResponse(response);
+        renderCatalog();
+      } catch (error) {
+        catalogContainer.innerHTML = '';
+        catalogContainer.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+    }
+
+    async function loadFavorites() {
+      try {
+        var response = await fetch(BASE_URL + '/favorites');
+        state.favorites = await parseResponse(response);
+        renderFavorites();
+      } catch (error) {
+        favoritesContainer.innerHTML = '';
+        favoritesContainer.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+    }
+
+    async function loadWardrobe() {
+      try {
+        var response = await fetch(BASE_URL + '/wardrobe');
+        renderWardrobe(await parseResponse(response));
+      } catch (error) {
+        wardrobeList.innerHTML = '';
+        wardrobeList.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+    }
+
+    async function generateOutfits() {
+      var btn = $('recommendButton');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-flex gap-1"><span class="dot-pulse flex items-center gap-0.5"><span class="h-1 w-1 rounded-full bg-black inline-block"></span><span class="h-1 w-1 rounded-full bg-black inline-block"></span><span class="h-1 w-1 rounded-full bg-black inline-block"></span></span></span>';
+      var payload = {
+        occasion: $('occasion').value,
+        budget: Number($('budget').value || 0),
+        style: $('style').value
+      };
+      try {
+        var response = await fetch(BASE_URL + '/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        var data = await parseResponse(response);
+        resultsSummary.textContent = data.summary.count + ' outfits found.';
+        renderOutfits(data.outfits);
+      } catch (error) {
+        resultsSummary.textContent = error.message;
+        outfitContainer.innerHTML = '';
+        outfitContainer.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="wand-2" class="h-4 w-4"></i> Generate Outfits';
+      lucide.createIcons();
+    }
+
+    async function saveFavorite(index) {
+      var outfit = state.lastOutfits[index];
+      if (!outfit) return;
+      try {
+        var response = await fetch(BASE_URL + '/favorites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: 'Saved ' + $('occasion').value + ' look', outfit: outfit })
+        });
+        await parseResponse(response);
+        await loadFavorites();
+      } catch (error) {
+        resultsSummary.textContent = error.message;
+      }
+    }
+
+    async function deleteFavorite(id) {
+      try {
+        var response = await fetch(BASE_URL + '/favorites/' + id, { method: 'DELETE' });
+        await parseResponse(response);
+        await loadFavorites();
+      } catch (error) {
+        resultsSummary.textContent = error.message;
+      }
+    }
+
+    async function askChatbot() {
+      var message = chatInput.value.trim();
+      if (!message) return;
+      chatInput.value = '';
+      addMessage('user', message);
+      chatButton.disabled = true;
+      chatButton.innerHTML = '<span class="inline-flex gap-1"><span class="dot-pulse flex items-center gap-0.5"><span class="h-1 w-1 rounded-full bg-black inline-block"></span><span class="h-1 w-1 rounded-full bg-black inline-block"></span><span class="h-1 w-1 rounded-full bg-black inline-block"></span></span></span>';
+      try {
+        var response = await fetch(BASE_URL + '/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: message })
+        });
+        var data = await parseResponse(response);
+        addMessage('ai', data.response || 'I could not generate a response right now.');
+      } catch (error) {
+        addMessage('ai', error.message);
+      }
+      chatButton.disabled = false;
+      chatButton.innerHTML = '<i data-lucide="send" class="h-4 w-4"></i> Send Message';
+      lucide.createIcons();
+    }
+
+    async function addWardrobeItem() {
+      var image = wardrobeImageInput.dataset.uploadedImage || '';
+      if (!image && wardrobeImageInput.files && wardrobeImageInput.files[0]) {
+        var formData = new FormData();
+        formData.append('image', wardrobeImageInput.files[0]);
+        try {
+          var uploadResponse = await fetch(BASE_URL + '/wardrobe/upload', { method: 'POST', body: formData });
+          var uploadData = await parseResponse(uploadResponse);
+          image = uploadData.image || '';
+        } catch (error) {
+          wardrobeAnalysis.textContent = error.message;
+          return;
+        }
+      }
+      var payload = {
+        name: $('wardrobeName').value.trim(),
+        category: $('wardrobeCategory').value,
+        color: $('wardrobeColor').value.trim() || 'unknown',
+        style: $('wardrobeStyle').value,
+        occasion: $('wardrobeOccasion').value,
+        image: image
+      };
+      if (!payload.name) return;
+      try {
+        var response = await fetch(BASE_URL + '/wardrobe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        await parseResponse(response);
+        $('wardrobeName').value = '';
+        $('wardrobeColor').value = '';
+        wardrobeImageInput.value = '';
+        wardrobeImageInput.dataset.uploadedImage = '';
+        wardrobePreview.classList.add('hidden');
+        wardrobePreview.src = '';
+        wardrobeAnalysis.textContent = 'Upload or snap a clothing image and the app will try to guess the details.';
+        await loadWardrobe();
+        await generateWardrobeOutfits();
+      } catch (error) {
+        wardrobeAnalysis.textContent = error.message;
+      }
+    }
+
+    async function generateWardrobeOutfits() {
+      try {
+        var response = await fetch(BASE_URL + '/wardrobe/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            occasion: $('wardrobeOccasion').value,
+            style: $('wardrobeStyle').value
+          })
+        });
+        var data = await parseResponse(response);
+        renderWardrobeOutfits(data.outfits);
+      } catch (error) {
+        wardrobeOutfits.innerHTML = '';
+        wardrobeOutfits.appendChild(createEmptySlot('alert-circle', error.message));
+        lucide.createIcons();
+      }
+    }
+
+    async function deleteWardrobeItem(id) {
+      try {
+        var response = await fetch(BASE_URL + '/wardrobe/' + id, { method: 'DELETE' });
+        await parseResponse(response);
+        await loadWardrobe();
+        await generateWardrobeOutfits();
+      } catch (error) {
+        wardrobeAnalysis.textContent = error.message;
+      }
+    }
+
+    async function processWardrobeMedia(file) {
+      if (!file) {
+        wardrobePreview.classList.add('hidden');
+        wardrobePreview.src = '';
+        wardrobeAnalysis.textContent = 'Upload or snap a clothing image and the app will try to guess the details.';
+        wardrobeImageInput.dataset.uploadedImage = '';
+        return;
+      }
+      wardrobePreview.classList.remove('hidden');
+      wardrobePreview.src = URL.createObjectURL(file);
+      wardrobeAnalysis.textContent = 'Analyzing image...';
+      var formData = new FormData();
+      formData.append('image', file);
+      try {
+        var response = await fetch(BASE_URL + '/wardrobe/upload', { method: 'POST', body: formData });
+        var data = await parseResponse(response);
+        var analysis = data.analysis || {};
+        var inferredItem = (analysis.items && analysis.items[0]) || {};
+        $('wardrobeName').value = inferredItem.name || $('wardrobeName').value;
+        $('wardrobeCategory').value = inferredItem.category || $('wardrobeCategory').value;
+        $('wardrobeColor').value = inferredItem.color || $('wardrobeColor').value;
+        $('wardrobeStyle').value = inferredItem.style || $('wardrobeStyle').value;
+        $('wardrobeOccasion').value = inferredItem.occasion || $('wardrobeOccasion').value;
+        wardrobeImageInput.dataset.uploadedImage = data.image || '';
+        wardrobeAnalysis.textContent = 'AI guessed ' + (inferredItem.name || 'item') + ' \u2014 ' + (inferredItem.category || 'top') + ' \u2014 ' + (inferredItem.color || 'unknown') + ' (' + (analysis.source || 'fallback') + ')';
+      } catch (error) {
+        wardrobeAnalysis.textContent = error.message;
+      }
+    }
+
+    // ===== Camera ====
+    $('openCameraButton').addEventListener('click', async function() {
+      try {
+        currentCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+        cameraStream.srcObject = currentCameraStream;
+        cameraContainer.classList.remove('hidden');
+        wardrobePreview.classList.add('hidden');
+      } catch (err) {
+        alert('Camera access denied or unavailable: ' + err.message);
+      }
+    });
+
+    $('closeCameraButton').addEventListener('click', function() {
+      if (currentCameraStream) {
+        currentCameraStream.getTracks().forEach(function(track) { track.stop(); });
+        currentCameraStream = null;
+      }
+      cameraContainer.classList.add('hidden');
+    });
+
+    $('snapPhotoButton').addEventListener('click', function() {
+      if (!currentCameraStream) return;
+      cameraCanvas.width = cameraStream.videoWidth;
+      cameraCanvas.height = cameraStream.videoHeight;
+      var ctx = cameraCanvas.getContext('2d');
+      ctx.drawImage(cameraStream, 0, 0, cameraCanvas.width, cameraCanvas.height);
+      currentCameraStream.getTracks().forEach(function(track) { track.stop(); });
+      currentCameraStream = null;
+      cameraContainer.classList.add('hidden');
+      cameraCanvas.toBlob(function(blob) {
+        if (!blob) return;
+        var file = new File([blob], 'camera_capture.jpg', { type: 'image/jpeg' });
+        processWardrobeMedia(file);
+      }, 'image/jpeg', 0.9);
+    });
+
+    // ===== File upload ====
+    wardrobeImageInput.addEventListener('change', function() {
+      var file = wardrobeImageInput.files && wardrobeImageInput.files[0];
+      processWardrobeMedia(file);
+    });
+
+    uploadZone.addEventListener('click', function() { wardrobeImageInput.click(); });
+
+    uploadZone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      uploadZone.classList.add('border-zinc-400', 'bg-zinc-800/20');
+    });
+
+    uploadZone.addEventListener('dragleave', function() {
+      uploadZone.classList.remove('border-zinc-400', 'bg-zinc-800/20');
+    });
+
+    uploadZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      uploadZone.classList.remove('border-zinc-400', 'bg-zinc-800/20');
+      var file = e.dataTransfer.files[0];
+      if (file) {
+        wardrobeImageInput.files = e.dataTransfer.files;
+        processWardrobeMedia(file);
+      }
+    });
+
+    // ===== Tab switching ====
+    document.querySelectorAll('.nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { switchTab(btn.dataset.tab); });
+    });
+
+    // ===== Generate ====
+    $('recommendButton').addEventListener('click', generateOutfits);
+    $('presetCollege').addEventListener('click', function() {
+      $('occasion').value = 'college';
+      $('budget').value = '3000';
+      $('style').value = 'streetwear';
+      generateOutfits();
+    });
+
+    // ===== Wardrobe ====
+    $('addWardrobeButton').addEventListener('click', addWardrobeItem);
+    $('generateWardrobeButton').addEventListener('click', generateWardrobeOutfits);
+
+    // ===== Chat ====
+    chatButton.addEventListener('click', askChatbot);
+    chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        askChatbot();
+      }
+    });
+
+    // ===== Event delegation ====
+    outfitContainer.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-save]');
+      if (btn) saveFavorite(Number(btn.dataset.save));
+    });
+
+    favoritesContainer.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-delete]');
+      if (btn) deleteFavorite(btn.dataset.delete);
+    });
+
+    wardrobeList.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-delete-wardrobe]');
+      if (btn) deleteWardrobeItem(btn.dataset.deleteWardrobe);
+    });
+
+    // ===== Init ====
+    Promise.allSettled([loadCatalog(), loadFavorites(), loadWardrobe(), loadTrends()]).then(function() {
+      generateOutfits();
+      generateWardrobeOutfits();
+    });
+  </script>
+</body>
+</html>
